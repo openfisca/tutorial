@@ -1,0 +1,51 @@
+{
+    "familles": {
+      "famille_1": {
+        "enfants": [
+          "Janet"
+        ],
+        "parents": [
+          "Alex",
+          "Sam"
+        ]
+      }
+    },
+    "foyers_fiscaux": {
+      "foyer_fiscal_1": {
+        "declarants": [
+          "Alex",
+          "Sam"
+        ],
+        "personnes_a_charge": [
+          "Janet"
+        ]
+      }
+    },
+    "individus": {
+      "Alex": {
+        "salaire_de_base": {
+          "2017": 20000
+        }
+      },
+      "Sam": {
+        "salaire_de_base": {
+          "2017": 30000
+        }
+      },
+      "Janet": {}
+    },
+    "menages": {
+      "menage_1": {
+        "conjoint": [
+          "Sam"
+        ],
+        "enfants": [
+          "Janet"
+        ],
+  
+        "personne_de_reference": [
+          "Alex"
+        ]
+      }
+    }
+}
