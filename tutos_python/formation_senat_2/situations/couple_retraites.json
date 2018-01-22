@@ -47,7 +47,7 @@
         "2018-01": 0
       },
       "aide_logement_non_calculable": {
-        "2018-01": ""
+        "2018-01":"calculable"
       },
       "asf": {
         "2017-01": 0,
@@ -208,7 +208,7 @@
         "2018-01": 0
       },
       "rsa_non_calculable": {
-        "2018-01": ""
+        "2018-01":"calculable"
       }
     }
   },
@@ -239,13 +239,13 @@
         "2018-01": 0
       },
       "aah_non_calculable": {
-        "2018-01": ""
+        "2018-01":"calculable"
       },
       "activite": {
-        "2017-10": "Retraité",
-        "2017-11": "Retraité",
-        "2017-12": "Retraité",
-        "2018-01": "Retraité"
+        "2017-10": "retraite",
+        "2017-11": "retraite",
+        "2017-12": "retraite",
+        "2018-01": "retraite"
       },
       "age": {
         "2017-10": 80,
@@ -292,10 +292,10 @@
       },
       "frais_reels": {},
       "gir": {
-        "2017-10": "Gir 6",
-        "2017-11": "Gir 6",
-        "2017-12": "Gir 6",
-        "2018-01": "Gir 6"
+        "2017-10": "gir_6",
+        "2017-11": "gir_6",
+        "2017-12": "gir_6",
+        "2018-01": "gir_6"
       },
       "handicap": {
         "2017-10": false,
@@ -345,10 +345,10 @@
         "2018-01": 1376
       },
       "statut_marital": {
-        "2017-10": "Marié",
-        "2017-11": "Marié",
-        "2017-12": "Marié",
-        "2018-01": "Marié"
+        "2017-10": "marie",
+        "2017-11": "marie",
+        "2017-12": "marie",
+        "2018-01": "marie"
       },
       "taux_incapacite": {
         "2017-10": false,
@@ -392,13 +392,13 @@
         "2018-01": 0
       },
       "aah_non_calculable": {
-        "2018-01": ""
+        "2018-01":"calculable"
       },
       "activite": {
-        "2017-10": "Retraité",
-        "2017-11": "Retraité",
-        "2017-12": "Retraité",
-        "2018-01": "Retraité"
+        "2017-10": "retraite",
+        "2017-11": "retraite",
+        "2017-12": "retraite",
+        "2018-01": "retraite"
       },
       "age": {
         "2017-10": 78,
@@ -445,10 +445,10 @@
       },
       "frais_reels": {},
       "gir": {
-        "2017-10": "Gir 5",
-        "2017-11": "Gir 5",
-        "2017-12": "Gir 5",
-        "2018-01": "Gir 5"
+        "2017-10": "gir_5",
+        "2017-11": "gir_5",
+        "2017-12": "gir_5",
+        "2018-01": "gir_5"
       },
       "handicap": {
         "2017-10": false,
@@ -498,10 +498,10 @@
         "2018-01": 1376
       },
       "statut_marital": {
-        "2017-10": "Marié",
-        "2017-11": "Marié",
-        "2017-12": "Marié",
-        "2018-01": "Marié"
+        "2017-10": "marie",
+        "2017-11": "marie",
+        "2017-12": "marie",
+        "2018-01": "marie"
       },
       "taux_incapacite": {
         "2017-10": false,
@@ -551,10 +551,10 @@
         "demandeur"
       ],
       "statut_occupation_logement": {
-        "2017-10": "Propriétaire (non accédant) du logement",
-        "2017-11": "Propriétaire (non accédant) du logement",
-        "2017-12": "Propriétaire (non accédant) du logement",
-        "2018-01": "Propriétaire (non accédant) du logement"
+        "2017-10": "proprietaire",
+        "2017-11": "proprietaire",
+        "2017-12": "proprietaire",
+        "2018-01": "proprietaire"
       }
     }
   }
