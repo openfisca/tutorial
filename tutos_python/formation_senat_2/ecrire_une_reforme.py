@@ -25,7 +25,12 @@ class MaReform(reforms.Reform):
 
 ####### Décrivez les entités ###########
 
-with open('situations/celib_smic_aucune_aides.json') as json_data:
+json_path='situations/celib_smic_aucune_aides.json'
+#json_path='situations/exemple_simple.json'
+#json_path='situations/couple_retraites.json'
+#json_path='situations/celibataire_1-enfant_mes-aides-546b1ae4de0b44f86312e86f.json'
+
+with open(json_path) as json_data:
     json1_str = json_data.read()
     situation = json.loads(json1_str)
 
