@@ -47,7 +47,7 @@
             "2018-01":0
          },
          "aide_logement_non_calculable":{
-            "2018-01":""
+            "2018-01":"calculable"
          },
          "asf":{
             "2017-01":0,
@@ -215,7 +215,7 @@
             "2018-01":0
          },
          "rsa_non_calculable":{
-            "2018-01":""
+            "2018-01":"calculable"
          }
       }
    },
@@ -247,7 +247,7 @@
             "2018-01":0
          },
          "aah_non_calculable":{
-            "2018-01":""
+            "2018-01":"calculable"
          },
          "age":{
             "2017-10":25,
@@ -292,10 +292,10 @@
             "2018-01":false
          },
          "gir":{
-            "2017-10":"Gir 6",
-            "2017-11":"Gir 6",
-            "2017-12":"Gir 6",
-            "2018-01":"Gir 6"
+            "2017-10":"gir_6",
+            "2017-11":"gir_6",
+            "2017-12":"gir_6",
+            "2018-01":"gir_6"
          },
          "handicap":{
             "2017-10":false,
@@ -391,10 +391,10 @@
             "2018-01":1149
          },
          "statut_marital":{
-            "2017-10":"Célibataire",
-            "2017-11":"Célibataire",
-            "2017-12":"Célibataire",
-            "2018-01":"Célibataire"
+            "2017-10":"celibataire",
+            "2017-11":"celibataire",
+            "2017-12":"celibataire",
+            "2018-01":"celibataire"
          },
          "taux_incapacite":{
             "2017-10":false,
@@ -461,10 +461,10 @@
             "demandeur"
          ],
          "statut_occupation_logement":{
-            "2017-10":"Locataire ou sous-locataire d'un logement loué vide non-HLM",
-            "2017-11":"Locataire ou sous-locataire d'un logement loué vide non-HLM",
-            "2017-12":"Locataire ou sous-locataire d'un logement loué vide non-HLM",
-            "2018-01":"Locataire ou sous-locataire d'un logement loué vide non-HLM"
+            "2017-10":"locataire_vide",
+            "2017-11":"locataire_vide",
+            "2017-12":"locataire_vide",
+            "2018-01":"locataire_vide"
          }
       }
    }
