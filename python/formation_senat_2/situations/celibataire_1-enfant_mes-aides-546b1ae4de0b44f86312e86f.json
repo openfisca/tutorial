@@ -1,0 +1,110 @@
+{
+  "menages": {
+    "_": {
+      "personne_de_reference": ["546b1ae4de0b44f86312e87d"],
+      "enfants": ["546b1ae4de0b44f86312e870"],
+      "depcom": {
+        "2014-11": "75120"
+      },
+      "participation_frais": {
+        "2014-11": false
+      },
+      "statut_occupation_logement": {
+        "2014-11": "loge_gratuitement"
+      }
+    }
+  },
+  "individus": {
+    "546b1ae4de0b44f86312e87d": {
+      "date_naissance": {
+        "ETERNITY": "1980-01-01"
+      },
+      "ressortissant_eee": {
+        "2014-11": true
+      },
+      "enfant_a_charge": {
+        "2014": true
+      },
+      "boursier": {
+        "2014-11": false
+      },
+      "statut_marital": {
+        "2014-11": "celibataire"
+      },
+      "epargne_non_remuneree": {
+        "2012-01": 0
+      },
+      "valeur_locative_immo_non_loue": {
+        "2012-01": 0
+      },
+      "valeur_locative_terrains_non_loue": {
+        "2012-01": 0
+      },
+      "interets_epargne_sur_livrets": {
+        "2012-01": 0
+      },
+      "gir": {
+        "2014-11": "non_defini"
+      }
+    },
+    "546b1ae4de0b44f86312e870": {
+      "date_naissance": {
+        "ETERNITY": "2005-01-01"
+      },
+      "ressortissant_eee": {
+        "2014-11": true
+      },
+      "enfant_a_charge": {
+        "2014": true
+      },
+      "boursier": {
+        "2014-11": false
+      },
+      "pensions_alimentaires_percues": {
+        "2014-08": 100,
+        "2014-09": 100,
+        "2014-10": 100,
+        "2013-11": 100,
+        "2013-12": 100,
+        "2014-01": 100,
+        "2014-02": 100,
+        "2014-03": 100,
+        "2014-04": 100,
+        "2014-05": 100,
+        "2014-06": 100,
+        "2014-07": 100,
+        "2014-11": 100
+      },
+      "epargne_non_remuneree": {
+        "2012-01": 0
+      },
+      "valeur_locative_immo_non_loue": {
+        "2012-01": 0
+      },
+      "valeur_locative_terrains_non_loue": {
+        "2012-01": 0
+      },
+      "interets_epargne_sur_livrets": {
+        "2012-01": 0
+      },
+      "gir": {
+        "2014-11": "non_defini"
+      }
+    }
+  },
+  "foyers_fiscaux": {
+    "_": {
+      "declarants": ["546b1ae4de0b44f86312e87d"],
+      "personnes_a_charge": ["546b1ae4de0b44f86312e870"]
+    }
+  },
+  "familles": {
+    "_" : {
+      "parents": ["546b1ae4de0b44f86312e87d"],
+      "enfants": ["546b1ae4de0b44f86312e870"],
+      "rsa_isolement_recent": {
+        "2014-11": true
+      }
+    }
+  }
+}
