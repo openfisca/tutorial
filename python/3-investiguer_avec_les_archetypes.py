@@ -12,11 +12,35 @@ from clean_mes_aides_situations import normalize
 
 ####### Listez les entités ###########
 
+# -*- coding: utf-8 -*-
+
+from os import listdir
+from os.path import isfile, join
+from pprint import pprint
+
+
+# Test abattement
+# 
+# Régime permanent
+# https://mes-aides.gouv.fr/trace?situationId=5a7831ca9e0bd16a72b0b219
+# 
+# Régime transitoire
+# https://mes-aides.gouv.fr/trace?situationId=5a7831de9e0bd16a72b0b21f
+# Mise en évidence de l'abattement
+
+mypath = '/repos/tutorial/python/exemples/gt_non_recours'
+mypath = '/repos/tutorial/python/situations'
+onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f)) and len(f) > 10 ]
+
 situations_json = [
+    mypath + '/' + f for f in onlyfiles
     #'situations/celib_smic_aucune_aides.json',
     #'situations/couple_retraites.json'
-    '/repos/tutorial/python/exemples/gt_non_recours/celibataire_aah_mes-aides_5a70bfe34b64656dc14d58a5'
+    #'/repos/tutorial/python/exemples/gt_non_recours/celibataire_aah_mes-aides_5a70bfe34b64656dc14d58a5'
+    #'/repos/tutorial/python/situations/celibataire_1_enfant_2000_n-2_mes-aides_5a71ed3a9a7bdd1d7a3e1dd5.json'
 ]
+
+pprint(situations_json)
 
 ####### Listez les calculs à effectuer et les periodes sur lequels les calculer ###########
 
@@ -70,16 +94,20 @@ year17 = '2017'
 periods = [jan18]
 
 calculs = {
-    'rfr': [year17],
-    'aah_base_ressources': periods,
-    'ass_base_ressources': periods,
-    'cmu_base_ressources': periods,
+    # 'rfr': [year17],
+    # 'aah_base_ressources': periods,
+    # 'ass_base_ressources': periods,
+    # 'cmu_base_ressources': periods,
     'prestations_familiales_base_ressources': periods,
-    'rsa':  periods,
-    'aide_logement': periods
+    #'rsa':  periods,
+    'aide_logement': periods,
+    'aide_logement_base_ressources': periods,
+    'aide_logement_base_ressources_defaut': periods,
+    'aide_logement_abattement_chomage_indemnise': periods,
+    'aide_logement_abattement_depart_retraite': periods,
+    'aide_logement_neutralisation_rsa': periods,
+    'rev_coll': ['2016', '2017', '2018']
 }
-
-
 
 
 fieldnames = ['Situation']
@@ -88,6 +116,9 @@ for calcul, periods in calculs.iteritems():
     for period in periods:
         label = calcul + '<' + period + '>'
         fieldnames.append(label)
+
+
+fieldnames = ['Situation', 'Period', 'Variable', 'Value']
 
 ##### Initialiser le fichier CSV pour export Excel ######
 
@@ -100,7 +131,8 @@ with open('resultats.csv', 'w') as csvfile:
             json_str = json_data.read()
             situation = json.loads(json_str)
 
-        results = {"Situation": situation_json}
+        pprint(situation_json)
+        results = {'Situation': situation_json}
 
         ####### Initialisez la simulation (rencontre des entités avec la legislation) ##############
 
@@ -109,11 +141,10 @@ with open('resultats.csv', 'w') as csvfile:
 
         ##### Demandez l'ensemble des calculs #####
         for calcul, periods in calculs.iteritems():
+            results['Variable'] = calcul
             for period in periods:
-                label = calcul + '<' + period + '>'
-                results[label] = simulation_actuelle.calculate(calcul, period)[0]
-
-        ##### Ecrire les resultats dans le CSV
-        writer.writerow(results)
+                results['Period'] = period
+                results['Value'] = simulation_actuelle.calculate(calcul, period)[0]
+                writer.writerow(results)
 
 print 'le calcul est terminé'
