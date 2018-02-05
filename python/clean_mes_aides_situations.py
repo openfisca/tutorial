@@ -33,7 +33,8 @@ def read(situationPath):
         return json.loads(json_str)
 
 def normalize(situation):
-    del situation['_id']
+    if '_id' in situation:
+        del situation['_id']
     for extension in extension_specifics:
         extension_specific = extension_specifics[extension]
 
