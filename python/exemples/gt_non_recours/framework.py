@@ -4,7 +4,6 @@
 import openfisca_france
 from framework_methods import *
 from reformes.reforme_test import MaReform
-import os
 
 legislation_france = openfisca_france.FranceTaxBenefitSystem()
 
@@ -18,13 +17,15 @@ situations = "situations/"
 
 ####### Listez les calculs à effectuer et les periodes sur lequels les calculer ###########
 
+period_month = '2018-02'
+period_year = '2017'
 calculs = {
-    'rfr': '2017',
-    'aah_base_ressources': '2018-02',
-    'ass_base_ressources': '2018-02',
-    'cmu_base_ressources': '2018-02',
-    'prestations_familiales_base_ressources': '2018-02',
-    'prestations_familiales_base_ressources_individu' : '2018-02'
+    'rfr': period_year,
+    'aah_base_ressources': period_month,
+    'ass_base_ressources': period_month,
+    'cmu_base_ressources': period_month,
+    'prestations_familiales_base_ressources': period_month,
+    'prestations_familiales_base_ressources_individu' : period_month
 }
 
 
