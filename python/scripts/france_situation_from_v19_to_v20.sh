@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# WIP - Ce script est en alpha.
+
 # Update an OpenFisca situation in JSON format:
 # updates some enumerations from openfisca-france v19 to v20.
 
