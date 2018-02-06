@@ -1,12 +1,20 @@
 # -*- coding: utf-8 -*-
 
 '''
-france_situation_from_mesaides_to_openfisca_v20.py : Converts a MesAides situations to OpenFisca v20, in JSON format.
+openfisca_json_customizer.py : Customizes a OpenFisca JSON situations.
+
+Input :
+  file.json is a Openfisca JSON situation to be updated (delete a key, change a period ...)
 
 Usage :
-  `python france_situation_from_mesaides_to_openfisca_v20.py file.json`
+  Define how you wish to modify your json file in `update_actions`. You can use the helpers defined in this file.
+  then run :
+  `python openfisca_json_customizer.py file.json`
 
-where file.json is a MesAides situation in JSON format.
+Output :
+  file.json, modified but whatever you defined in update action
+where file.json is an OpenFisca situation in JSON format.
+
 '''
 
 import json
@@ -14,27 +22,27 @@ import sys
 import dpath.util
 
 
-# Fonctions principales
+# Main functions
 
 def update_json(json_file):
   with open(json_file, 'r+') as f:
     json_content = json.load(f)
-    update_actions(f, json_content)
+    update_actions(json_content)
     update_file(f, json_content)
 
 
-def update_actions(file_stream, json_content):
-  # Ex : Mise à jour de la valeur d'id et vérification de succès
+def update_actions(json_content):
+  # E.g. : Mise à jour de la valeur d'id et vérification de succès
   id_key = u'_id'
-  json_content = update_value(json_content, id_key, u'toto')
+  # json_content = update_value(json_content, id_key, u'toto')
+  # print_value(json_content, id_key)
+
+  # E.g. : Suppression d'id et vérification de succès
+  json_content = delete_key(json_content, id_key)
   print_value(json_content, id_key)
 
-  # Ex : Suppression d'id et vérification de succès
-  json_content = delete_key(file_stream, json_content, id_key)
-  print_value(json_content, id_key)
 
-
-# Fonction auxilaires
+# Helpers
 
 
 def print_value(json_content, key):
@@ -58,14 +66,13 @@ def update_value(json_content, key, new_value):
   return json_content
 
 
-# Path rather than key ? ex : 'a/b/e/f/g'
 def update_key(json_content, old_key, new_key, new_value):
   json_content = delete_key(json_content, old_key)
   json_content = add_key(json_content, new_key, new_value)
   return json_content
 
 
-def delete_key(file_stream, json_content, key):
+def delete_key(json_content, key):
   try:
     json_content.pop(key, None)
   except KeyError as e:
@@ -79,6 +86,6 @@ def update_file(file, content):
   file.write(json.dumps(content, file, indent=4, sort_keys=True))
 
 
-# Exécution de la mise à jour
+# Runs the modifying script on the json file
 
 update_json(sys.argv[1])
