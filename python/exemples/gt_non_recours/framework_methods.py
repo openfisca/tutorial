@@ -2,7 +2,8 @@
 import json
 import csv
 import os
-from openfisca_core.simulations import Simulation
+from openfisca_core.simulations import Simulation, SituationParsingError
+from openfisca_core.parameters import ParameterNotFound
 
 
 def removeComputedValues(situation):
@@ -62,8 +63,12 @@ def run_situation(reform_name, reform, situation_json,  calculs):
     ##### Demandez l'ensemble des calculs #####
     for calcul, period in calculs.iteritems():
         results
-        results[calcul] = simulation.calculate(calcul, period)[0]
-        print('.')
+        try:
+            results[calcul] = simulation.calculate(calcul, period)[0]
+            print('. ' + calcul)
+        except ParameterNotFound as e:
+            print 'x ' + calcul
+            print e.message + os.linesep
 
     return results
 
@@ -73,12 +78,17 @@ def run_reform(reform_name, reform, situations_directory, calculs):
 
     situations_json = []
     for situation in os.listdir(situations_directory):
-        situations_json.append(os.path.join(situations_directory, situation))
+        if situation.endswith('.json'):
+            situations_json.append(os.path.join(situations_directory, situation))
 
     for situation_json in situations_json:
-        calculs_situation = run_situation(reform_name, reform, situation_json, calculs)
-        calculs_situation_reform.append(calculs_situation)
-        print('/')
+        try:
+            calculs_situation = run_situation(reform_name, reform, situation_json, calculs)
+            calculs_situation_reform.append(calculs_situation)
+            print('/ ' + situation_json)
+        except SituationParsingError as e:
+            print "situation mal formée : " + situation_json
+            print str(e.message) + os.linesep
     return calculs_situation_reform
 
 
