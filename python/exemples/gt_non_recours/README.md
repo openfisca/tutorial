@@ -1,2 +1,1 @@
-# Supports pour le groupe de travail
-
+# Support pour le travail du groupe de travail `Accès aux droits et aux services, lutte contre le non recours` de la `Délégation Interministérielle à la prévention et à la lutte contre la pauvreté des enfants et des jeunes`
