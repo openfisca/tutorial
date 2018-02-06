@@ -3,6 +3,7 @@ from openfisca_core import reforms
 from openfisca_core import periods
 from openfisca_france.model.base import *
 
+
 class aide_logement_abattement_depart_retraite(Variable):
     value_type = float
     entity = Individu
@@ -12,15 +13,20 @@ class aide_logement_abattement_depart_retraite(Variable):
     reference = u"https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000006750910&cidTexte=LEGITEXT000006073189&dateTexte=20151231"
 
     def formula(individu, period, parameters):
-        retraite_m_13 = individu('retraite_imposable', period.m_13, options = [ADD])
+        m_13 = period.offset(-13, 'month')
+        retraite_m_13 = individu('retraite_imposable', m_13, options = [ADD])
         activite = individu('activite', period)
         retraite = activite == TypesActivite.retraite
         condition_abattement = (retraite_m_13 == 0) * retraite
-        revenus_activite_pro = individu('revenu_assimile_salaire_apres_abattements', [from period.m_13 to  period.m_1])
-        revenus_du_chomage = individu('revenu_du_chomage', [from period.m_13 to  period.m_1]
+
+        # [from period.m_13 to period.m_1]
+        m_13_to_m_1 = m_13.start.period('year', 1)
+        revenus_activite_pro = individu('revenu_assimile_salaire_apres_abattements', m_13_to_m_1)
+        revenus_du_chomage = individu('revenu_du_chomage', m_13_to_m_1)
         abattement = condition_abattement * 0.3 * (revenus_activite_pro + revenus_du_chomage)
 
         return abattement
+
 
 # Cette partie décrit les changements
 class prestations_familiales_base_ressources_individu(Variable):
