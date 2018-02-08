@@ -22,6 +22,7 @@ period_month = '2018-02'
 period_year = '2017'
 calculs = {
     'base_ressource_mensuelle_individu': period_month,
+    'base_ressource_mensuelle_famille': period_month
 }
 
 

@@ -26,7 +26,7 @@ class base_ressource_mensuelle_individu(Variable):
 
         indemnites_journalieres_maternite = individu('indemnites_journalieres_maternite', period)
         indemnites_journalieres_maladie = individu('indemnites_journalieres_maladie', period)
-        indemnites_journalieres_maladie_professionnelle = individu('indemnites_journalieres_maladie_professionnelle, period)', period)
+        # indemnites_journalieres_maladie_professionnelle = individu('indemnites_journalieres_maladie_professionnelle, period)', period)
         indemnites_journalieres_accident_travail = individu('indemnites_journalieres_accident_travail', period)
         
         indemnites_chomage_partiel = individu('indemnites_chomage_partiel', period)
@@ -61,7 +61,7 @@ class base_ressource_mensuelle_individu(Variable):
                 prestation_compensation_handicap +
                 indemnites_journalieres_maternite +
                 indemnites_journalieres_maladie +
-                indemnites_journalieres_maladie_professionnelle +
+                #indemnites_journalieres_maladie_professionnelle +
                 indemnites_journalieres_accident_travail +
                 indemnites_chomage_partiel +
                 indemnites_volontariat +
@@ -80,14 +80,16 @@ class base_ressource_mensuelle_individu(Variable):
                 revenus_capital +
                 tns_auto_entrepreneur_chiffre_affaires
         )
+
+
 class base_ressource_mensuelle_famille(Variable):
     value_type = float
-    entity = Individu
+    entity = Famille
     label = u"Base de ressource mensuelle d'une famille"
     definition_period = MONTH
     reference = u"???"
 
-    def formula(individu, period, parameters):
+    def formula(famille, period, parameters):
         aide_logement = famille('aide_logement', period)
         allocations_familiales = famille('af', period)
         complement_familial = famille('cf', period)
@@ -106,7 +108,22 @@ class base_ressource_mensuelle_famille(Variable):
         
         base_ressources_membres = famille.sum(famille.members('base_ressource_mensuelle_individu', period))
 
-        return aide_logement
+        return (
+            aide_logement +
+            allocations_familiales +
+            complement_familial +
+            allocation_soutien_familial +
+            revenu_solidarite_active +
+            prime_activite +
+            allocation_solidarite_personnes_agees +
+            allocation_suplementaire_invalidite +
+            allocation_solidarite_specifique +
+            allocation_education_enfant_handicape +
+            paje_base +
+            paje_clca +
+            paje_prepare +
+            base_ressources_membres
+        )
 
 
 class base_ressource_annuelle_individu(Variable):
@@ -129,4 +146,5 @@ class MaReform(reforms.Reform):
 
     def apply(self):
         self.add_variable(base_ressource_mensuelle_individu)
+        self.add_variable(base_ressource_mensuelle_famille)
 
