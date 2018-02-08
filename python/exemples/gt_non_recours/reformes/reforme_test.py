@@ -11,11 +11,61 @@ class BMGG(Variable):
     reference = u"???"
 
     def formula(individu, period, parameters):
+        # mensuel - individu
+        individu('salaire_net_hors_revenus_exceptionnels', period)
+        individu('primes_salaires_net', period)
+        individu('indemnites_stage', period)
+        individu('revenus_stage_formation_pro', period)
+        individu('chomage_net', period)
+        individu('allocation_securisation_professionnelle', period)
+        individu('prime_forfaitaire_mensuelle_reprise_activite', period)
+        individu('aah', period)
+        individu('caah', period)
+        individu('mva', period)
+        individu('pch', period)
+        individu('indemnites_journalieres_maternite', period)
+        individu('indemnites_journalieres_maladie', period)
+        individu('indemnites_journalieres_maladie_professionnelle, period)', period)
+        individu('indemnites_journalieres_accident_travail', period)
+        individu('indemnites_chomage_partiel', period)
+        individu('indemnites_volontariat', period)
+        individu('indemnite_fin_contrat_net', period)
+        individu('dedommagement_victime_amiante', period)
+        individu('pensions_alimentaires_percues', period)
+        individu('pensions_alimentaires_versees_individu', period)
+        individu('prestation_compensatoire', period)
+        individu('retraite_nette', period)
+        individu('retraite_combattant', period)
+        individu('pensions_invalidite', period)
+        individu('bourse_enseignement_sup', period)
+        individu('bourse_recherche', period)
+        individu('gains_exceptionnels', period)
+        individu('revenus_locatifs', period)
+        individu('revenus_capital', period)
+        individu('tns_auto_entrepreneur_chiffre_affaires', period)
+
+        # mensuel - famille
+        famille('aide_logement', period)
+        famille('af', period)
+        famille('cf', period)
+        famille('asf', period)
+        famille('rsa', period)
+        famille('ppa', period)
+        famille('aspa', period)
+        famille('asi', period)
+        famille('ass', period)
+        famille('aeeh', period)
+        famille('paje_base', period)
+        famille('paje_clca', period)
+        famille('paje_prepare', period)
+
+        # annuel
+        individu('tns_micro_entreprise_chiffre_affaires', period)
+        individu('tns_benefice_exploitant_agricole', period)
+        individu('tns_autres_revenus', period)
+        
         salaires = individu(salaire_net_hors_revenus_exceptionnels, period)
-
-
         return salaires
-
 
 
 class aide_logement_abattement_depart_retraite(Variable):
