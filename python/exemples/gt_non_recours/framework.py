@@ -8,8 +8,9 @@ from reformes.reforme_test import MaReform
 legislation_france = openfisca_france.FranceTaxBenefitSystem()
 
 reformes = {
-    "France" : legislation_france,
-    "Reforme de test" : MaReform(legislation_france)}
+    #"France" : legislation_france,
+    "Reforme de test" : MaReform(legislation_france)
+}
 
 ####### Listez les entités ###########
 
@@ -20,12 +21,7 @@ situations = "situations_test/"
 period_month = '2018-02'
 period_year = '2017'
 calculs = {
-    'rfr': period_year,
-    'aah_base_ressources': period_month,
-    'ass_base_ressources': period_month,
-    'cmu_base_ressources': period_month,
-    'prestations_familiales_base_ressources': period_month,
-    'prestations_familiales_base_ressources_individu' : period_month
+    'BMGG': period_month,
 }
 
 
