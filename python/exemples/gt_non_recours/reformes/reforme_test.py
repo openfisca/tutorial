@@ -72,6 +72,8 @@ class base_ressource_mensuelle_famille(Variable):
         paje_base = famille('paje_base', period)
         paje_clca = famille('paje_clca', period)
         paje_prepare = famille('paje_prepare', period)
+        
+        base_ressources_membres = famille.sum(famille.members('base_ressource_mensuelle_individu', period))
 
         return aide_logement
 
