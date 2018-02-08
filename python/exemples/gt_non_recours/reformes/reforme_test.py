@@ -26,7 +26,7 @@ class base_ressource_mensuelle_individu(Variable):
 
         indemnites_journalieres_maternite = individu('indemnites_journalieres_maternite', period)
         indemnites_journalieres_maladie = individu('indemnites_journalieres_maladie', period)
-        indemnites_journalieres_maladie_professionnelle, period) = individu('indemnites_journalieres_maladie_professionnelle, period)', period)
+        indemnites_journalieres_maladie_professionnelle = individu('indemnites_journalieres_maladie_professionnelle, period)', period)
         indemnites_journalieres_accident_travail = individu('indemnites_journalieres_accident_travail', period)
         
         indemnites_chomage_partiel = individu('indemnites_chomage_partiel', period)
@@ -47,8 +47,39 @@ class base_ressource_mensuelle_individu(Variable):
         revenus_capital = individu('revenus_capital', period)
         tns_auto_entrepreneur_chiffre_affaires = individu('tns_auto_entrepreneur_chiffre_affaires', period)
 
-        return salaires
-
+        return (
+                salaires +
+                primes_salaires_net +
+                indemnites_stage +
+                revenus_stage_formation_pro +
+                chomage_net +
+                allocation_securisation_professionnelle +
+                prime_forfaitaire_mensuelle_reprise_activite +
+                allocation_adulte_handicape +
+                complement_allocation_adulte_handicape +
+                majoration_vie_autonome +
+                prestation_compensation_handicap +
+                indemnites_journalieres_maternite +
+                indemnites_journalieres_maladie +
+                indemnites_journalieres_maladie_professionnelle +
+                indemnites_journalieres_accident_travail +
+                indemnites_chomage_partiel +
+                indemnites_volontariat +
+                indemnite_fin_contrat_net +
+                dedommagement_victime_amiante +
+                pensions_alimentaires_percues +
+                pensions_alimentaires_versees_individu +
+                prestation_compensatoire +
+                retraite_nette +
+                retraite_combattant +
+                pensions_invalidite +
+                bourse_enseignement_sup +
+                bourse_recherche +
+                gains_exceptionnels +
+                revenus_locatifs +
+                revenus_capital +
+                tns_auto_entrepreneur_chiffre_affaires
+        )
 class base_ressource_mensuelle_famille(Variable):
     value_type = float
     entity = Individu
