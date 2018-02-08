@@ -3,6 +3,20 @@ from openfisca_core import reforms
 from openfisca_core import periods
 from openfisca_france.model.base import *
 
+class BMGG(Variable):
+    value_type = float
+    entity = Individu
+    label = u"Base de ressource mensuelle d'un individu"
+    definition_period = MONTH
+    reference = u"???"
+
+    def formula(individu, period, parameters):
+        salaires = individu(salaire_net_hors_revenus_exceptionnels, period)
+
+
+        return salaires
+
+
 
 class aide_logement_abattement_depart_retraite(Variable):
     value_type = float
