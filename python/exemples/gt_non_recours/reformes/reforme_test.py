@@ -3,7 +3,8 @@ from openfisca_core import reforms
 from openfisca_core import periods
 from openfisca_france.model.base import *
 
-class BMGG(Variable):
+
+class base_ressource_mensuelle_individu(Variable):
     value_type = float
     entity = Individu
     label = u"Base de ressource mensuelle d'un individu"
@@ -11,108 +12,88 @@ class BMGG(Variable):
     reference = u"???"
 
     def formula(individu, period, parameters):
-        # mensuel - individu
-        individu('salaire_net_hors_revenus_exceptionnels', period)
-        individu('primes_salaires_net', period)
-        individu('indemnites_stage', period)
-        individu('revenus_stage_formation_pro', period)
-        individu('chomage_net', period)
-        individu('allocation_securisation_professionnelle', period)
-        individu('prime_forfaitaire_mensuelle_reprise_activite', period)
-        individu('aah', period)
-        individu('caah', period)
-        individu('mva', period)
-        individu('pch', period)
-        individu('indemnites_journalieres_maternite', period)
-        individu('indemnites_journalieres_maladie', period)
-        individu('indemnites_journalieres_maladie_professionnelle, period)', period)
-        individu('indemnites_journalieres_accident_travail', period)
-        individu('indemnites_chomage_partiel', period)
-        individu('indemnites_volontariat', period)
-        individu('indemnite_fin_contrat_net', period)
-        individu('dedommagement_victime_amiante', period)
-        individu('pensions_alimentaires_percues', period)
-        individu('pensions_alimentaires_versees_individu', period)
-        individu('prestation_compensatoire', period)
-        individu('retraite_nette', period)
-        individu('retraite_combattant', period)
-        individu('pensions_invalidite', period)
-        individu('bourse_enseignement_sup', period)
-        individu('bourse_recherche', period)
-        individu('gains_exceptionnels', period)
-        individu('revenus_locatifs', period)
-        individu('revenus_capital', period)
-        individu('tns_auto_entrepreneur_chiffre_affaires', period)
+        salaires = individu('salaire_net_hors_revenus_exceptionnels', period)
+        primes_salaires_net = individu('primes_salaires_net', period)
+        indemnites_stage = individu('indemnites_stage', period)
+        revenus_stage_formation_pro = individu('revenus_stage_formation_pro', period)
+        chomage_net = individu('chomage_net', period)
+        allocation_securisation_professionnelle = individu('allocation_securisation_professionnelle', period)
+        prime_forfaitaire_mensuelle_reprise_activite = individu('prime_forfaitaire_mensuelle_reprise_activite', period)
+        allocation_adulte_handicape = individu('aah', period)
+        complement_allocation_adulte_handicape = individu('caah', period)
+        majoration_vie_autonome = individu('mva', period)
+        prestation_compensation_handicap = individu('pch', period)
 
-        # mensuel - famille
-        famille('aide_logement', period)
-        famille('af', period)
-        famille('cf', period)
-        famille('asf', period)
-        famille('rsa', period)
-        famille('ppa', period)
-        famille('aspa', period)
-        famille('asi', period)
-        famille('ass', period)
-        famille('aeeh', period)
-        famille('paje_base', period)
-        famille('paje_clca', period)
-        famille('paje_prepare', period)
-
-        # annuel
-        individu('tns_micro_entreprise_chiffre_affaires', period)
-        individu('tns_benefice_exploitant_agricole', period)
-        individu('tns_autres_revenus', period)
+        indemnites_journalieres_maternite = individu('indemnites_journalieres_maternite', period)
+        indemnites_journalieres_maladie = individu('indemnites_journalieres_maladie', period)
+        indemnites_journalieres_maladie_professionnelle, period) = individu('indemnites_journalieres_maladie_professionnelle, period)', period)
+        indemnites_journalieres_accident_travail = individu('indemnites_journalieres_accident_travail', period)
         
-        salaires = individu(salaire_net_hors_revenus_exceptionnels, period)
+        indemnites_chomage_partiel = individu('indemnites_chomage_partiel', period)
+        indemnites_volontariat = individu('indemnites_volontariat', period)
+        indemnite_fin_contrat_net = individu('indemnite_fin_contrat_net', period)
+        
+        dedommagement_victime_amiante = individu('dedommagement_victime_amiante', period)
+        pensions_alimentaires_percues = individu('pensions_alimentaires_percues', period)
+        pensions_alimentaires_versees_individu = individu('pensions_alimentaires_versees_individu', period)
+        prestation_compensatoire = individu('prestation_compensatoire', period)
+        retraite_nette = individu('retraite_nette', period)
+        retraite_combattant = individu('retraite_combattant', period)
+        pensions_invalidite = individu('pensions_invalidite', period)
+        bourse_enseignement_sup = individu('bourse_enseignement_sup', period)
+        bourse_recherche = individu('bourse_recherche', period)
+        gains_exceptionnels = individu('gains_exceptionnels', period)
+        revenus_locatifs = individu('revenus_locatifs', period)
+        revenus_capital = individu('revenus_capital', period)
+        tns_auto_entrepreneur_chiffre_affaires = individu('tns_auto_entrepreneur_chiffre_affaires', period)
+
         return salaires
 
-
-class aide_logement_abattement_depart_retraite(Variable):
+class base_ressource_mensuelle_famille(Variable):
     value_type = float
     entity = Individu
-    label = u"Montant de l'abattement sur les salaires en cas de départ en retraite"
+    label = u"Base de ressource mensuelle d'une famille"
     definition_period = MONTH
-    # Article R532-5 du Code de la sécurité sociale
-    reference = u"https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000006750910&cidTexte=LEGITEXT000006073189&dateTexte=20151231"
+    reference = u"???"
 
     def formula(individu, period, parameters):
-        m_13 = period.offset(-13, 'month')
-        retraite_m_13 = individu('retraite_imposable', m_13, options = [ADD])
-        activite = individu('activite', period)
-        retraite = activite == TypesActivite.retraite
-        condition_abattement = (retraite_m_13 == 0) * retraite
+        aide_logement = famille('aide_logement', period)
+        allocations_familiales = famille('af', period)
+        complement_familial = famille('cf', period)
+        allocation_soutien_familial = famille('asf', period)
+        revenu_solidarite_active = famille('rsa', period)
+        prime_activite = famille('ppa', period)
 
-        # [from period.m_13 to period.m_1]
-        m_13_to_m_1 = m_13.start.period('year', 1)
-        revenus_activite_pro = individu('revenu_assimile_salaire_apres_abattements', m_13_to_m_1)
-        revenus_du_chomage = individu('revenu_du_chomage', m_13_to_m_1)
-        abattement = condition_abattement * 0.3 * (revenus_activite_pro + revenus_du_chomage)
+        allocation_solidarite_personnes_agees = famille('aspa', period)
+        allocation_suplementaire_invalidite = famille('asi', period)
+        allocation_solidarite_specifique = famille('ass', period)
+        allocation_education_enfant_handicape = famille('aeeh', period)
 
-        return abattement
+        paje_base = famille('paje_base', period)
+        paje_clca = famille('paje_clca', period)
+        paje_prepare = famille('paje_prepare', period)
+
+        return aide_logement
 
 
-# Cette partie décrit les changements
-class prestations_familiales_base_ressources_individu(Variable):
-        value_type = float
-        is_period_size_independent = True
-        entity = Individu
-        label = u"Base ressource individuelle des prestations familiales"
-        definition_period = MONTH
+class base_ressource_annuelle_individu(Variable):
+    value_type = float
+    entity = Individu
+    label = u"Base de ressource annuelle d'un individu"
+    definition_period = MONTH
+    reference = u"???"
 
-        def formula(individu, period):
-            annee_fiscale_n_1 = periods.period('2017')
+    def formula(individu, period, parameters):
+        tns_micro_entreprise_chiffre_affaires = individu('tns_micro_entreprise_chiffre_affaires', period)
+        tns_benefice_exploitant_agricole = individu('tns_benefice_exploitant_agricole', period)
+        tns_autres_revenus = individu('tns_autres_revenus', period)
 
-            traitements_salaires_pensions_rentes = individu('traitements_salaires_pensions_rentes', annee_fiscale_n_1)
-            hsup = individu('hsup', annee_fiscale_n_1, options=[ADD])
-            rpns = individu('rpns', annee_fiscale_n_1)
-            glo = individu('glo', annee_fiscale_n_1)
-            div = individu('div', annee_fiscale_n_1)
-
-            return traitements_salaires_pensions_rentes + hsup + rpns + glo + div
+        return tns_autres_revenus
 
 
 # Cette partie rassemble les changements dans une seule réforme appelée ici MaReforme
 class MaReform(reforms.Reform):
+
     def apply(self):
-        self.update_variable(prestations_familiales_base_ressources_individu)
+        self.add_variable(base_ressource_mensuelle_individu)
+
