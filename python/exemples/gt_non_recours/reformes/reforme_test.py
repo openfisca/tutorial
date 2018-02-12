@@ -3,6 +3,8 @@ from openfisca_core import reforms
 from openfisca_core import periods
 from openfisca_france.model.base import *
 
+# Question : 'indemnites_journalieres_imposables' semble dire que certaines indemnités journalières ne sont imposables qu'à 50%, doit on prendre 50% de ces montants ?
+# question : indemnites_journalieres_maladie_professionnelle ne tourne pas et on ne sait pas pourquoi
 
 class base_ressource_mensuelle_individu(Variable):
     value_type = float
@@ -61,7 +63,7 @@ class base_ressource_mensuelle_individu(Variable):
                 prestation_compensation_handicap +
                 indemnites_journalieres_maternite +
                 indemnites_journalieres_maladie +
-                #indemnites_journalieres_maladie_professionnelle +
+                # indemnites_journalieres_maladie_professionnelle +
                 indemnites_journalieres_accident_travail +
                 indemnites_chomage_partiel +
                 indemnites_volontariat +
@@ -130,7 +132,7 @@ class base_ressource_annuelle_individu(Variable):
     value_type = float
     entity = Individu
     label = u"Base de ressource annuelle d'un individu"
-    definition_period = MONTH
+    definition_period = YEAR
     reference = u"???"
 
     def formula(individu, period, parameters):
@@ -138,8 +140,43 @@ class base_ressource_annuelle_individu(Variable):
         tns_benefice_exploitant_agricole = individu('tns_benefice_exploitant_agricole', period)
         tns_autres_revenus = individu('tns_autres_revenus', period)
 
-        return tns_autres_revenus
+        return (
+            tns_micro_entreprise_chiffre_affaires +
+            tns_benefice_exploitant_agricole +
+            tns_autres_revenus
+        )
 
+
+class base_ressources_al_2019(Variable):
+    value_type = float
+    entity = Famille
+    label = u"Base de ressource annuelle d'un individu"
+    definition_period = MONTH
+    reference = u"???"
+
+    def formula(famille, period, parameters):
+        annee = periods.instant(period).year
+        annee_n = periods.instant(annee).period('year')
+        annee_n1 = annee_n.offset(-1, 'year')
+
+        base_ressource_annuelle_famille = famille.sum(famille.members('base_ressource_annuelle_individu', annee_n1))
+
+        return (
+            famille('base_ressource_mensuelle_famille', period.offset(-1, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-2, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-3, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-4, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-5, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-6, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-7, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-8, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-9, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-10, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-11, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-12, 'month')) +
+            famille('base_ressource_mensuelle_famille', period.offset(-13, 'month')) +
+            base_ressource_annuelle_famille
+        )
 
 # Cette partie rassemble les changements dans une seule réforme appelée ici MaReforme
 class MaReform(reforms.Reform):
@@ -147,4 +184,6 @@ class MaReform(reforms.Reform):
     def apply(self):
         self.add_variable(base_ressource_mensuelle_individu)
         self.add_variable(base_ressource_mensuelle_famille)
+        self.add_variable(base_ressource_annuelle_individu)
+        self.add_variable(base_ressources_al_2019)
 
