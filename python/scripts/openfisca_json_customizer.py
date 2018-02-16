@@ -19,6 +19,7 @@ where file.json is an OpenFisca situation in JSON format.
 
 import json
 import sys
+from collections import OrderedDict
 import dpath.util
 from dpath.exceptions import PathNotFound 
 import logging
@@ -34,7 +35,7 @@ log.setLevel(logging.DEBUG)
 
 def update_json(json_file, update_actions):
   with open(json_file, 'r+') as f:
-    json_content = json.load(f)
+    json_content = json.load(f, object_pairs_hook=OrderedDict)
     update_actions(json_content)
     update_file(f, json_content)
 
@@ -45,7 +46,6 @@ def update_actions(json_content):
   # json_content = update_value(json_content, id_key, u'toto')
   # print_value(json_content, id_key)
 
-  from_mesaides_to_openfisca(json_content)
 
 # Helpers
 
@@ -95,13 +95,13 @@ def delete_key(json_content, key):
 def update_file(file, content):
   file.seek(0)
   file.truncate()
-  file.write(json.dumps(content, file, indent=4, sort_keys=True))
+  file.write(json.dumps(OrderedDict(content), file, indent=4, sort_keys=True))
 
 
 if __name__ == "__main__":
   # Runs the modifying script on the json file
   try:
-    update_json(sys.argv[1])
+    update_json(sys.argv[1], update_actions)
   except BaseException as e:
     if len(sys.argv) == 1:
       log.error(u'Missing a .json file to customize.')
