@@ -68,18 +68,15 @@ def print_json(json_content):
 
 def add_key(json_content, new_key, new_value):
   dpath.util.new(json_content, new_key, new_value)
-  return json_content
 
 
 def update_value(json_content, key, new_value):
   dpath.util.set(json_content, key, new_value)
-  return json_content
 
 
 def update_key(json_content, old_key, new_key, new_value):
-  json_content = delete_key(json_content, old_key)
-  json_content = add_key(json_content, new_key, new_value)
-  return json_content
+  delete_key(json_content, old_key)
+  add_key(json_content, new_key, new_value)
 
 
 def delete_key(json_content, key):

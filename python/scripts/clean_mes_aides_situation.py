@@ -16,7 +16,7 @@ def from_mesaides_to_openfisca(json_content):
   Removing mes-aides.gouv.fr application keys from given json content.
   '''
 
-  json_content = delete_key(json_content, u'_id')
+  delete_key(json_content, u'_id')
 
   paris_keys = ['paris_complement_sante', 
     'paris_energie_famille', 'paris_forfait_famille', 
@@ -24,36 +24,36 @@ def from_mesaides_to_openfisca(json_content):
     'paris_logement_aspeh', 'paris_logement_plfm', 'paris_logement_psol',
     'parisien']
   for key in paris_keys:
-    json_content = delete_key(json_content, 'familles/_/' + key)
+    delete_key(json_content, 'familles/_/' + key)
   
   transport_keys = ['brest_metropole_transport', 'rennes_metropole_transport']
   for key in transport_keys:
-    json_content = delete_key(json_content, 'individus/demandeur/' + key)
-    json_content = delete_key(json_content, 'individus/enfant_0/' + key)
+    delete_key(json_content, 'individus/demandeur/' + key)
+    delete_key(json_content, 'individus/enfant_0/' + key)
 
-  json_content = delete_mesaides_pre_computed_keys(json_content, '2018-01')
+  delete_mesaides_pre_computed_keys(json_content, '2018-01')
 
 
 def delete_mesaides_pre_computed_keys(json_content, period_str):
-  json_content = delete_key(json_content, 'familles/_/acs/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/af/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/aide_logement/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/aide_logement_non_calculable/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/asf/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/asi/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/aspa/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/ass/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/bourse_college/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/bourse_lycee/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/cf/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/cmu_c/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/paje_base/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/ppa/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/rsa/' + period_str)
-  json_content = delete_key(json_content, 'familles/_/rsa_non_calculable/' + period_str)
-  json_content = delete_key(json_content, 'individus/demandeur/aah/' + period_str)
-  json_content = delete_key(json_content, 'individus/demandeur/aah_non_calculable/' + period_str)
-  json_content = delete_key(json_content, 'individus/demandeur/acs/' + period_str)  # TODO Check existence.
+  delete_key(json_content, 'familles/_/acs/' + period_str)
+  delete_key(json_content, 'familles/_/af/' + period_str)
+  delete_key(json_content, 'familles/_/aide_logement/' + period_str)
+  delete_key(json_content, 'familles/_/aide_logement_non_calculable/' + period_str)
+  delete_key(json_content, 'familles/_/asf/' + period_str)
+  delete_key(json_content, 'familles/_/asi/' + period_str)
+  delete_key(json_content, 'familles/_/aspa/' + period_str)
+  delete_key(json_content, 'familles/_/ass/' + period_str)
+  delete_key(json_content, 'familles/_/bourse_college/' + period_str)
+  delete_key(json_content, 'familles/_/bourse_lycee/' + period_str)
+  delete_key(json_content, 'familles/_/cf/' + period_str)
+  delete_key(json_content, 'familles/_/cmu_c/' + period_str)
+  delete_key(json_content, 'familles/_/paje_base/' + period_str)
+  delete_key(json_content, 'familles/_/ppa/' + period_str)
+  delete_key(json_content, 'familles/_/rsa/' + period_str)
+  delete_key(json_content, 'familles/_/rsa_non_calculable/' + period_str)
+  delete_key(json_content, 'individus/demandeur/aah/' + period_str)
+  delete_key(json_content, 'individus/demandeur/aah_non_calculable/' + period_str)
+  delete_key(json_content, 'individus/demandeur/acs/' + period_str)  # TODO Check existence.
 
 
 if __name__ == "__main__":
@@ -67,7 +67,8 @@ if __name__ == "__main__":
           update_json(os.path.join(json_target, file), from_mesaides_to_openfisca)  
     else:
       if not is_json(json_target):
-        log.error(u"")
+        log.error(json_target + u" isn't a json file.")
+        raise Exception(u"Missing a directory or a .json file to clean.")
       update_json(json_target, from_mesaides_to_openfisca)
 
   except BaseException as e:
