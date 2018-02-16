@@ -41,8 +41,8 @@ def update_json(json_file, update_actions):
 
 
 def update_actions(json_content):
-  # Add here any action you want to apply to json_content.
-  # 
+  log.info("Add in 'update_actions' function any action you want to apply to json_content.")
+
   # E.g. : Updating '_id' key value and priting it
   # id_key = u'_id'
   # json_content = update_value(json_content, id_key, u'toto')
@@ -52,7 +52,7 @@ def update_actions(json_content):
 # Helpers
 
 def is_json(file_path):
-  return json_target[-5:] == ".json"
+  return file_path[-5:] == ".json"
 
 
 def print_value(json_content, key):
