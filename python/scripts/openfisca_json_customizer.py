@@ -41,6 +41,8 @@ def update_json(json_file, update_actions):
 
 
 def update_actions(json_content):
+  # Add here any action you want to apply to json_content.
+  # 
   # E.g. : Updating '_id' key value and priting it
   # id_key = u'_id'
   # json_content = update_value(json_content, id_key, u'toto')
@@ -96,6 +98,8 @@ def update_file(file, content):
   file.seek(0)
   file.truncate()
   file.write(json.dumps(OrderedDict(content), file, indent=4, sort_keys=True))
+  file.write("\n")
+
 
 
 if __name__ == "__main__":
