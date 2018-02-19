@@ -22,7 +22,7 @@ class base_ressource_mensuelle_individu(Variable):
         allocation_securisation_professionnelle = individu('allocation_securisation_professionnelle', period)
         prime_forfaitaire_mensuelle_reprise_activite = individu('prime_forfaitaire_mensuelle_reprise_activite', period)
         allocation_adulte_handicape = individu('aah', period)
-        complement_allocation_adulte_handicape = individu('caah', period)
+        # complement_allocation_adulte_handicape = individu('caah', period)
         majoration_vie_autonome = individu('mva', period)
         prestation_compensation_handicap = individu('pch', period)
 
@@ -58,7 +58,7 @@ class base_ressource_mensuelle_individu(Variable):
                 allocation_securisation_professionnelle +
                 prime_forfaitaire_mensuelle_reprise_activite +
                 allocation_adulte_handicape +
-                complement_allocation_adulte_handicape +
+                # complement_allocation_adulte_handicape +
                 majoration_vie_autonome +
                 prestation_compensation_handicap +
                 indemnites_journalieres_maternite +
@@ -92,12 +92,12 @@ class base_ressource_mensuelle_famille(Variable):
     reference = u"???"
 
     def formula(famille, period, parameters):
-        aide_logement = famille('aide_logement', period)
+        # aide_logement = famille('aide_logement', period)
         allocations_familiales = famille('af', period)
         complement_familial = famille('cf', period)
         allocation_soutien_familial = famille('asf', period)
-        revenu_solidarite_active = famille('rsa', period)
-        prime_activite = famille('ppa', period)
+        # revenu_solidarite_active = famille('rsa', period)
+        # prime_activite = famille('ppa', period)
 
         allocation_solidarite_personnes_agees = famille('aspa', period)
         allocation_suplementaire_invalidite = famille('asi', period)
@@ -111,12 +111,12 @@ class base_ressource_mensuelle_famille(Variable):
         base_ressources_membres = famille.sum(famille.members('base_ressource_mensuelle_individu', period))
 
         return (
-            aide_logement +
+            # aide_logement +
             allocations_familiales +
             complement_familial +
             allocation_soutien_familial +
-            revenu_solidarite_active +
-            prime_activite +
+            # revenu_solidarite_active +
+            # prime_activite +
             allocation_solidarite_personnes_agees +
             allocation_suplementaire_invalidite +
             allocation_solidarite_specifique +
@@ -147,7 +147,7 @@ class base_ressource_annuelle_individu(Variable):
         )
 
 
-class base_ressources_al_2019(Variable):
+class aide_logement_base_ressources(Variable):
     value_type = float
     entity = Famille
     label = u"Base de ressource annuelle d'un individu"
@@ -159,23 +159,27 @@ class base_ressources_al_2019(Variable):
         annee_n = periods.instant(annee).period('year')
         annee_n1 = annee_n.offset(-1, 'year')
 
-        base_ressource_annuelle_famille = famille.sum(famille.members('base_ressource_annuelle_individu', annee_n1))
+        base_ressource_annuelle_membres_famille = famille.sum(famille.members('base_ressource_annuelle_individu', annee_n1))
+        # base_ressource_mensuelle_famille_n1 = famille.sum(
+        #     famille('base_ressource_mensuelle_famille', annee_n1, options = [ADD])
+        #     )
 
         return (
-            famille('base_ressource_mensuelle_famille', period.offset(-1, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-2, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-3, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-4, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-5, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-6, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-7, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-8, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-9, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-10, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-11, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-12, 'month')) +
-            famille('base_ressource_mensuelle_famille', period.offset(-13, 'month')) +
-            base_ressource_annuelle_famille
+             # famille('base_ressource_mensuelle_famille', period.offset(-1, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-2, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-3, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-4, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-5, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-6, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-7, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-8, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-9, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-10, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-11, 'month'))
+             + famille('base_ressource_mensuelle_famille', period.offset(-12, 'month'))
+            + famille('base_ressource_mensuelle_famille', period.offset(-13, 'month'))
+            # base_ressource_mensuelle_famille_n1
+            + base_ressource_annuelle_membres_famille
         )
 
 # Cette partie rassemble les changements dans une seule réforme appelée ici MaReforme
@@ -185,5 +189,5 @@ class MaReform(reforms.Reform):
         self.add_variable(base_ressource_mensuelle_individu)
         self.add_variable(base_ressource_mensuelle_famille)
         self.add_variable(base_ressource_annuelle_individu)
-        self.add_variable(base_ressources_al_2019)
+        self.update_variable(aide_logement_base_ressources)
 

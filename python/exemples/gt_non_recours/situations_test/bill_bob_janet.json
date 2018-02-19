@@ -24,11 +24,21 @@
   "individus": {
     "Bill": {
       "salaire_de_base": {
+        "2016": 20000,
+        "2017": 20000
+      },
+      "salaire_imposable": {
+        "2016": 20000,
         "2017": 20000
       }
     },
     "Bob": {
       "salaire_de_base": {
+        "2016": 30000,
+        "2017": 30000
+      },
+      "salaire_imposable": {
+        "2016": 30000,
         "2017": 30000
       }
     },
