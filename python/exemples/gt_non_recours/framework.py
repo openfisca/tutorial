@@ -25,7 +25,9 @@ calculs = {
     # 'base_ressource_mensuelle_famille': period_month,
     # 'base_ressource_annuelle_individu': period_year,
     # 'base_ressources_al_2019': period_month,
-    'aide_logement_base_ressources': period_month
+    'aide_logement_base_ressources': period_month,
+    'aide_logement': period_month,
+    'loyer': period_month
 }
 
 
