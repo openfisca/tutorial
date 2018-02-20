@@ -27,11 +27,15 @@ def from_mesaides_to_openfisca(json_content):
     delete_key(json_content, 'familles/_/' + key)
   
   transport_keys = ['brest_metropole_transport', 'rennes_metropole_transport']
+  children_number = 10
   for key in transport_keys:
     delete_key(json_content, 'individus/demandeur/' + key)
-    delete_key(json_content, 'individus/enfant_0/' + key)
+    delete_key(json_content, 'individus/conjoint/' + key)
+    for c in range(0, children_number-1):
+      delete_key(json_content, 'individus/enfant_'+ str(c) +'/' + key)
 
-  delete_mesaides_pre_computed_keys(json_content, '2018-01')
+  pre_computed_period = '2018-01'
+  delete_mesaides_pre_computed_keys(json_content, pre_computed_period)
 
 
 def delete_mesaides_pre_computed_keys(json_content, period_str):
