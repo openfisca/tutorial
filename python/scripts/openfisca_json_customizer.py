@@ -42,6 +42,9 @@ def update_json(json_file, update_actions):
 
 def update_actions(json_content):
   log.info("Add in 'update_actions' function any action you want to apply to json_content.")
+  
+  # Point to a specific key using its name or its path (explore a json file like a file system)
+  # For more information, see: https://pypi.python.org/pypi/dpath
 
   # E.g. : Updating the a key's value and printing it, assuming the key is u'_id' and the new value is 'toto'.
   # id_key = u'_id'
@@ -89,7 +92,6 @@ def delete_key(json_content, key):
     log.error(e.message)
   except PathNotFound as e:
     log.error(e.message)
-  return json_content
       
 
 def update_file(file, content):
