@@ -43,9 +43,10 @@ def update_json(json_file, update_actions):
 def update_actions(json_content):
   log.info("Add in 'update_actions' function any action you want to apply to json_content.")
 
-  # E.g. : Updating '_id' key value and priting it
+  # E.g. : Updating the a key's value and printing it, assuming the key is u'_id' and the new value is 'toto'.
   # id_key = u'_id'
-  # json_content = update_value(json_content, id_key, u'toto')
+  # new_value = u'toto'
+  # update_value(json_content, id_key, new_value)
   # print_value(json_content, id_key)
 
 
