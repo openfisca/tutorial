@@ -73,7 +73,7 @@ def run_situation(reform_name, reform, situation_json,  calculs):
     return results
 
 def run_reform(reform_name, reform, situations_directory, calculs):
-    print '#'
+    print '# ' + reform_name
     calculs_situation_reform = []
 
     situations_json = []
@@ -87,7 +87,7 @@ def run_reform(reform_name, reform, situations_directory, calculs):
             calculs_situation_reform.append(calculs_situation)
             print('/ ' + situation_json)
         except SituationParsingError as e:
-            print "situation mal formée : " + situation_json
+            print 'situation mal formée : ' + situation_json
             print str(e.message) + os.linesep
     return calculs_situation_reform
 

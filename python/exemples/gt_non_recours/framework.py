@@ -8,24 +8,26 @@ from reformes.reforme_test import MaReform
 legislation_france = openfisca_france.FranceTaxBenefitSystem()
 
 reformes = {
-    "France" : legislation_france,
-    "Reforme de test" : MaReform(legislation_france)}
+    "France" : legislation_france,  # situation actuelle
+    "Reforme de test" : MaReform(legislation_france)
+}
 
 ####### Listez les entités ###########
 
 situations = "situations/"
 
-####### Listez les calculs à effectuer et les periodes sur lequels les calculer ###########
+####### Listez les calculs à effectuer et les périodes sur lequelles les calculer ###########
 
 period_month = '2018-02'
 period_year = '2017'
 calculs = {
-    'rfr': period_year,
-    'aah_base_ressources': period_month,
-    'ass_base_ressources': period_month,
-    'cmu_base_ressources': period_month,
-    'prestations_familiales_base_ressources': period_month,
-    'prestations_familiales_base_ressources_individu' : period_month
+    # 'base_ressource_mensuelle_individu': period_month,
+    # 'base_ressource_mensuelle_famille': period_month,
+    # 'base_ressource_annuelle_individu': period_year,
+    # 'base_ressources_al_2019': period_month,
+    'aide_logement_base_ressources': period_month,
+    'aide_logement': period_month,
+    'loyer': period_month
 }
 
 
