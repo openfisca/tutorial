@@ -14,7 +14,7 @@ reformes = {
 
 ####### Listez les entités ###########
 
-situations = "situations_test/"
+situations = "situations/"
 
 ####### Listez les calculs à effectuer et les périodes sur lequelles les calculer ###########
 
