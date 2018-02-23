@@ -2,22 +2,8 @@
 
 import openfisca_france
 from openfisca_core.simulations import Simulation
-from openfisca_core import reforms
-from openfisca_core import periods
+from reforme_parametre import MaReform
 
-####### Décrivez votre réforme ###########
-
-# Cette partie décrit les changements
-def modify_my_parameters(parameters):
-    reform_year = 2017
-    reform_period = periods.period(reform_year)
-    parameters.impot_revenu.bareme[1].rate.update(start=reform_period, value=0)
-    return parameters
-
-# Cette partie rassemble les changements dans une seule réforme appelée ici MaReforme
-class MaReform(reforms.Reform):
-    def apply(self):
-        self.modify_parameters(modifier_function = modify_my_parameters)
 
 
 ####### Décrivez les entités ###########

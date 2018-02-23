@@ -6,49 +6,6 @@ from openfisca_core.simulations import Simulation, SituationParsingError
 from openfisca_core.parameters import ParameterNotFound
 
 
-def removeComputedValues(situation):
-    toremove = {
-        'familles': {
-            'acs': '2018-01',
-            'af': '2018-01',
-            'aide_logement': '2018-01',
-            'aide_logement_non_calculable': '2018-01',
-            'asf': '2018-01',
-            'asi': '2018-01',
-            'aspa': '2018-01',
-            'ass': '2018-01',
-            'bourse_college': '2018-01',
-            'bourse_lycee': '2018-01',
-            'cf': '2018-01',
-            'cmu_c': '2018-01',
-            'paje_base': '2018-01',
-            'ppa': '2018-01',
-            'rsa': '2018-01',
-            'rsa_non_calculable': '2018-01'
-        },
-        'individus': {
-            'aah': '2018-01',
-            'aah_non_calculable': '2018-01',
-            'acs': '2018-01',
-            'acs': '2018-01',
-            'acs': '2018-01'
-        }
-    }
-
-    for entityKey in toremove:
-        entities_in_situ = situation[entityKey] # Familles
-        variables = toremove[entityKey] # {acs : jan-01, ...}
-
-        for entity_id in entities_in_situ:
-            entity_in_situ = entities_in_situ[entity_id]
-
-            for variable in variables: # acs
-                if variable in entity_in_situ:
-                    del entity_in_situ[variable]
-
-    return situation
-
-
 def run_situation(reform_name, reform, situation_json,  calculs):
     with open(situation_json) as json_data:
         json_str = json_data.read()
@@ -58,7 +15,7 @@ def run_situation(reform_name, reform, situation_json,  calculs):
 
     ####### Initialisez la simulation (rencontre des entités avec la legislation) ##############
 
-    simulation = Simulation(tax_benefit_system=reform, simulation_json=removeComputedValues(situation))
+    simulation = Simulation(tax_benefit_system=reform, simulation_json=situation)
 
     ##### Demandez l'ensemble des calculs #####
     for calcul, period in calculs.iteritems():
