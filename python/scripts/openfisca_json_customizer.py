@@ -19,73 +19,99 @@ where file.json is an OpenFisca situation in JSON format.
 
 import json
 import sys
+from collections import OrderedDict
 import dpath.util
+from dpath.exceptions import PathNotFound 
+import logging
 
 
 # Main functions
 
-def update_json(json_file):
+handler = logging.StreamHandler()
+log = logging.getLogger(__name__)
+log.addHandler(handler)
+log.setLevel(logging.DEBUG)
+
+
+def update_json(json_file, update_actions):
   with open(json_file, 'r+') as f:
-    json_content = json.load(f)
+    json_content = json.load(f, object_pairs_hook=OrderedDict)
     update_actions(json_content)
     update_file(f, json_content)
 
 
 def update_actions(json_content):
-  # E.g. : Mise à jour de la valeur d'id et vérification de succès
-  id_key = u'_id'
-  # json_content = update_value(json_content, id_key, u'toto')
-  # print_value(json_content, id_key)
+  log.info("Add in 'update_actions' function any action you want to apply to json_content.")
+  
+  # Point to a specific key using its name or its path (explore a json file like a file system)
+  # For more information, see: https://pypi.python.org/pypi/dpath
 
-  # E.g. : Suppression d'id et vérification de succès
-  json_content = delete_key(json_content, id_key)
-  print_value(json_content, id_key)
+  # E.g. : Updating the a key's value and printing it, assuming the key is u'_id' and the new value is 'toto'.
+  # id_key = u'_id'
+  # new_value = u'toto'
+  # update_value(json_content, id_key, new_value)
+  # print_value(json_content, id_key)
 
 
 # Helpers
 
+def is_json(file_path):
+  return file_path[-5:] == ".json"
+
 
 def print_value(json_content, key):
   try:
-    print key + ": " + dpath.util.get(json_content, key)
+    log.info(key + u": " + str(dpath.util.get(json_content, key)))
   except KeyError as e:
-    print 'Clef ' + e.message + ' introuvable.'
+    log.error(e.message + u' key non found.')
 
 
 def print_json(json_content):
-  print json.dumps(json_content, indent=4, sort_keys=True)
+  log.info(json.dumps(json_content, indent=4, sort_keys=True))
 
 
 def add_key(json_content, new_key, new_value):
   dpath.util.new(json_content, new_key, new_value)
-  return json_content
 
 
 def update_value(json_content, key, new_value):
   dpath.util.set(json_content, key, new_value)
-  return json_content
 
 
 def update_key(json_content, old_key, new_key, new_value):
-  json_content = delete_key(json_content, old_key)
-  json_content = add_key(json_content, new_key, new_value)
-  return json_content
+  delete_key(json_content, old_key)
+  add_key(json_content, new_key, new_value)
 
 
 def delete_key(json_content, key):
   try:
-    json_content.pop(key, None)
+    dpath.util.delete(json_content, key)
+    log.debug(key + u' key deleted.')
+
   except KeyError as e:
-    print 'Clef ' + e.message + ' introuvable.'
-  return json_content
+    log.error(e.message)
+  except PathNotFound as e:
+    log.error(e.message)
       
 
 def update_file(file, content):
   file.seek(0)
   file.truncate()
-  file.write(json.dumps(content, file, indent=4, sort_keys=True))
+  file.write(json.dumps(OrderedDict(content), file, indent=4, sort_keys=True))
+  file.write("\n")
 
 
-# Runs the modifying script on the json file
 
-update_json(sys.argv[1])
+if __name__ == "__main__":
+  # Runs the modifying script on the json file
+  try:
+    update_json(sys.argv[1], update_actions)
+  except BaseException as e:
+    if len(sys.argv) == 1:
+      log.error(u'Missing a .json file to customize.')
+      log.warn(u'USAGE : python openfisca_json_customizer.py file.json')
+    else:
+      if e.message:
+        log.error(str(e.__class__.__name__)+ ': ' + e.message)
+      else:
+        log.error(e)
