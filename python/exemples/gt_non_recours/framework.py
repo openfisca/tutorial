@@ -44,7 +44,7 @@ calculs = {
 
 fieldnames = ['Situation', 'Reform', 'Period', 'Variable', 'Value']
 
-with open('resultats-.csv', 'w') as csvfile:
+with open('resultats--.csv', 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
 
