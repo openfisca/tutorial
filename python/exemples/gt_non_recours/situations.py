@@ -43,6 +43,49 @@ rupture_2017 = {
     }
 }
 
+hausse_2017 = {
+    'familles': {
+        'f1': {
+            'parents': ['Dominique']
+        }
+    },
+    'foyers_fiscaux': {
+        'ff1': {
+            'declarants': ['Dominique']
+        }
+    },
+    'individus': {
+        'Dominique': {
+            'salaire_imposable': {
+                '2015': 12 * 1000,
+                '2016': 12 * 1000,
+                '2017': 12 * 1800,
+                '2018': 12 * 1800,
+                '2019': 12 * 1800
+            }
+        }
+    },
+    'menages': {
+        'm1': {
+            'personne_de_reference': ['Dominique'],
+            'loyer': {
+                '2015': 12 * 500,
+                '2016': 12 * 500,
+                '2017': 12 * 500,
+                '2018': 12 * 500,
+                '2019': 12 * 500
+            },
+            'statut_occupation_logement': {
+                '2015': 'locataire_vide',
+                '2016': 'locataire_vide',
+                '2017': 'locataire_vide',
+                '2018': 'locataire_vide',
+                '2019': 'locataire_vide'
+            }
+        }
+    }
+}
+
 salaire_fluctuant_mensuel = {
     '01': 800,
     '02': 500,
@@ -98,7 +141,7 @@ fluctuant_2017 = {
 }
 
 situations = {
-    #'stable': stable,
-    #'rupture_2017': rupture_2017
-    'fluctuant_2017': fluctuant_2017
+    'rupture_2017': rupture_2017,
+    'fluctuant_2017': fluctuant_2017,
+    'hausse_2017': hausse_2017
 }
