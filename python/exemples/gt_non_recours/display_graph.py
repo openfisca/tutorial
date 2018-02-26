@@ -11,15 +11,15 @@ def draw():
     i=0
     for (name, situation) in situations.iteritems():
         figure = plt.figure(figsize=(12, 8))
-        x_axis = []
-        x_axis_labels = []
 
         # for reform in al_reforms:
         reform = al_reforms[0]
         simulation_actuelle = Simulation(tax_benefit_system=reform['legislation'], simulation_json=situation)
             
-        y_axis = []
         for calcul, periods in calculs.iteritems():
+            x_axis = []
+            x_axis_labels = []
+            y_axis = []
             for period in periods:
                 if period not in x_axis:
                     x_axis_labels.append(period)
@@ -28,13 +28,20 @@ def draw():
                 data = simulation_actuelle.calculate(calcul, period)
                 y_axis.append(data[0])
 
+            print "x_axis"
+            print len(x_axis)
+            print x_axis
+            print x_axis_labels
+
+
             print "y_axis"
             print len(y_axis)
             print y_axis
 
-            plt.xticks(x_axis, x_axis_labels)
+        
             plt.plot(x_axis, y_axis, label=reform['name'] + '.' + calcul)
 
+        plt.xticks(x_axis, x_axis_labels)
         plt.xlabel(u'periods')
         plt.legend()
         plt.show(block=True)
