@@ -16,4 +16,23 @@ Just click here to start:
 
 ## Python
 
-Tutorials in [python](https://www.python.org) programming language for [reforms](http://openfisca.org/doc/reforms.html) creation on the French tax and benefit system.
+### [Python tutorials for OpenFisca-France](./python/)
+
+With the Python [Tutorials](./python/) (in French), you will learn how to:
+- use the python API to run calculations
+- get results on the current legislation as well as on reforms
+- export results to .csv files
+
+### [Situations for OpenFisca-France](./python/situations)
+
+This directory contains pre-filled input data, called situations, extracted from the French ["Livret du pouvoir d'achat"](https://www.economie.gouv.fr/files/files/PLF2018/bro-pouvoir-achat-bat-web-10h.pdf).
+
+You can use them 'as is' in the web API or import them in the python API as shown in the python tutorials. 
+
+### [Python scripts for OpenFisca-France](./python/scripts)
+
+- [`openfisca_json_customizer.py`](./python/scripts/openfisca_json_customizer.py) takes in an OpenFisca situation and customizes it thanks to a few helper methods.
+- [`clean_mes_aides_situation.py`](./python/scripts/clean_mes_aides_situation.py) takes in a [Mes Aides](https://mes-aides.gouv.fr) situation and turns it into an OpenFisca-France situation.
+- [`generate_situation_example`](./python/scripts/generate_situation_examples) contains the `situation_example package`, along with the `try_situation_examples.py` script. The `situation_examples` package contains complete cookie cutter situations (single, couple, roommates) that are ready to use in the python API, and the web API (in their json form) 
+
+To run one of the following scripts, go to its directory an call it with the `python` command.
