@@ -2,6 +2,7 @@
 from openfisca_core import reforms
 from openfisca_core import periods
 from openfisca_france.model.base import *
+from numpy import logical_or as or_
 
 class af_eligibilite_base(Variable):
     value_type = bool
@@ -13,7 +14,7 @@ class af_eligibilite_base(Variable):
         residence_dom = famille.demandeur.menage('residence_dom', period)
         af_nbenf = famille('af_nbenf', period)
 
-    return not_(residence_dom) * (af_nbenf >= 1)
+        return not_(residence_dom) * (af_nbenf >= 1)
 
 class af_base(Variable):
     value_type = float
@@ -46,9 +47,8 @@ class af_base(Variable):
         return montant_base_module
 
 # Cette partie rassemble les changements dans une seule réforme appelée ici MaReforme
-class MaReform(reforms.Reform):
+class reforme_1enfant(reforms.Reform):
 
     def apply(self):
         self.update_variable(af_base)
         self.update_variable(af_eligibilite_base)
-
