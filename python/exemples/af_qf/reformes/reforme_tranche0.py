@@ -16,7 +16,7 @@ class af_taux_modulation(Variable):
         pfam = parameters(period).prestations.prestations_familiales.af
         base_ressources = famille('prestations_familiales_base_ressources', period)
         modulation = pfam.modulation
-        plafond0 = 18144 + (af_nbenf>=2)*3000
+        plafond0 = 20989 + (af_nbenf>=2)*3143
         plafond1 = modulation.plafond_tranche_1 + max_(af_nbenf - 2, 0) * modulation.majoration_plafond_par_enfant_supplementaire
         plafond2 = modulation.plafond_tranche_2 + max_(af_nbenf - 2, 0) * modulation.majoration_plafond_par_enfant_supplementaire
         taux_tranche_0 = 1.25

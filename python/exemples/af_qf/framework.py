@@ -13,7 +13,7 @@ reformes = {
     "Reforme 1er enfant" : reforme_1enfant(legislation_france),
     "Reforme BMAF" : increase_bmaf(legislation_france),
     "Reforme Tranche 0" : reforme_tranche0(legislation_france),
-    "Reforme cumulee" : reforme_1enfant(increase_bmaf(legislation_france))
+    "Reforme cumulee" : reforme_1enfant(reforme_tranche0((increase_bmaf(legislation_france))))  
 }
 
 ####### Listez les entités ###########

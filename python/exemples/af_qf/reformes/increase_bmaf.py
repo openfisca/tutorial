@@ -19,3 +19,4 @@ def modifier_un_parametre(parameters):
 class increase_bmaf(reforms.Reform):
     def apply(self):
         self.modify_parameters(modifier_function = modifier_un_parametre)
+
