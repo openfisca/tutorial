@@ -1,0 +1,20 @@
+class af_double(Variable):
+    value_type = float
+    entity = Famille
+    label = u"Allocations familiales doublée"
+    definition_period = MONTH
+    # prestations familiales (brutes de crds)
+
+    def formula(famille, period, parameters):
+        af = famille('af',period)
+
+        return (
+            af * 2
+        )
+
+# Cette partie rassemble les changements dans une seule réforme appelée ici MaReforme
+class double_af(reforms.Reform):
+
+    def apply(self):
+        self.update_variable(af)
+        #self.update_variable(af_double)
