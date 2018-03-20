@@ -29,10 +29,11 @@ class af_base(Variable):
         af_nbenf = famille('af_nbenf', period)
 
         pfam = parameters(period).prestations.prestations_familiales.af
+        pfam.taux.enf1 = pfam.taux.enf2 * 0.5
 
         eligibilite = (eligibilite_base)
 
-        un_seul_enfant = (af_nbenf == 1) * pfam.af_dom.taux_enfant_seul
+        un_seul_enfant = (af_nbenf == 1) *  pfam.taux.enf1
         deux_enfants = (af_nbenf >= 2) * pfam.taux.enf2
         plus_de_trois_enfants = max_(af_nbenf - 2, 0) * pfam.taux.enf3
         taux_total = un_seul_enfant + deux_enfants + plus_de_trois_enfants
