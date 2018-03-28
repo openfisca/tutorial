@@ -9,7 +9,7 @@ from framework import calculs, situations, al_reforms
 
 
 def draw(situations, al_reforms, calculs):
-    i=0
+    plt.close('all')  # Close all previous figures
     for (name, situation) in situations.iteritems():
         figure = plt.figure(figsize=(12, 8))
 
@@ -28,23 +28,13 @@ def draw(situations, al_reforms, calculs):
                     data = simulation_actuelle.calculate(calcul, period)
                     y_axis.append(data[0])
 
-                print "x_axis"
-                print len(x_axis)
-                print x_axis
-                print x_axis_labels
-
-
-                print "y_axis"
-                print len(y_axis)
-                print y_axis
-            
                 plt.plot(x_axis, y_axis, label=reform['name'] + '.' + calcul)
 
         plt.xticks(x_axis, x_axis_labels, fontsize=5)
         plt.xlabel(u'periods')
         plt.legend(loc=1)
         
-        figure.autofmt_xdate()
+        figure.autofmt_xdate()  # Rotate x ticks
         figure.savefig('figure')
         plt.show(block=True)
 
