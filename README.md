@@ -36,3 +36,7 @@ You can use them 'as is' in the web API or import them in the python API as show
 - [`generate_situation_example`](./python/scripts/generate_situation_examples) contains the `situation_example package`, along with the `try_situation_examples.py` script. The `situation_examples` package contains complete cookie cutter situations (single, couple, roommates) that are ready to use in the python API, and the web API (in their json form) 
 
 To run one of the following scripts, go to its directory an call it with the `python` command.
+
+### [Frequently Asked Questions](./FAQ.md)
+
+This page (in French) provides solutions for some technical issues experienced by users on Python tutorial for OpenFisca France.
