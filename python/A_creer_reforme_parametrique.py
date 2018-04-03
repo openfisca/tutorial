@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import openfisca_france
-from reforme_parametre import MaReform
+from reforme_parametrique import MaReform
 
 ####### Consulter la situation actuelle ##############
 legislation_france = openfisca_france.FranceTaxBenefitSystem()

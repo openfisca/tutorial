@@ -4,7 +4,7 @@
 
 import openfisca_france
 from openfisca_core.simulations import Simulation
-from reforme_variable import MaReform
+from reforme_structurelle import MaReform
 import json
 
 
@@ -27,9 +27,9 @@ simulation_actuelle = Simulation(tax_benefit_system=legislation_france, simulati
 bases_ressources = ['aah_base_ressources', 'ass_base_ressources', 'cmu_base_ressources', 'prestations_familiales_base_ressources']
 
 for base in bases_ressources:
-    print base
-    print simulation_actuelle.calculate(base, '2018-01')
-    print '---'
+    print (base)
+    print (simulation_actuelle.calculate(base, '2018-01'))
+    print ('---')
 
 
 # ####### Calcule la situation avec la réforme ##############
@@ -38,27 +38,10 @@ legislation_reforme = MaReform(legislation_france)
 simulation_reforme = Simulation(tax_benefit_system=legislation_reforme, simulation_json=situation)
 
 # Insérez ci-dessous la variable que vous souhaitez calculer (ex : 'impots_directs')
-# ainsi que la periode sur laquelle vous souaitez la calculer (ex : '2017')
+# ainsi que la periode sur laquelle vous souhaitez la calculer (ex : '2017')
 bases_ressources = [ 'base_ressource_mensuelle_individu', ]
 
 for base in bases_ressources:
-    print base
-    print simulation_reforme.calculate(base, '2018-01')
-    print '---'
-
-
-
-# Annexes - Des bases ressources disponibles dans openfisca
-# RFR / annee
-# 'base_ressources_apa'
-# 'rsa_base_ressources'
-# 'aah_base_ressources'
-# 'ass_base_ressources'
-# 'cmu_base_ressources'
-# 'ppa_base_ressources'
-# 'asi_aspa_base_ressources'
-# 'rsa_base_ressources'
-# 'prestations_familiales_base_ressources'
-
-
-
+    print (base)
+    print (simulation_reforme.calculate(base, '2018-01'))
+    print ('---')
