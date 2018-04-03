@@ -1,47 +1,51 @@
 from periods import years
 
-rupture_2017 = {
-    'familles': {
-        'f1': {
-            'parents': ['Faustine']
+
+def createSituation(name, salaires):
+    return {
+        'familles': {
+            'f1': {
+                'parents': [name]
+            }
+        },
+        'foyers_fiscaux': {
+            'ff1': {
+                'declarants': [name]
+            }
+        },
+        'individus': {
+            name: {
+                'salaire_imposable': salaires
+            }
+        },
+        'menages': {
+            'm1': {
+                'personne_de_reference': [name],
+                'loyer': {
+                    '2015': 12 * 500,
+                    '2016': 12 * 500,
+                    '2017': 12 * 500,
+                    '2018': 12 * 500,
+                    '2019': 12 * 500
+                },
+                'statut_occupation_logement': {
+                    '2015': 'locataire_vide',
+                    '2016': 'locataire_vide',
+                    '2017': 'locataire_vide',
+                    '2018': 'locataire_vide',
+                    '2019': 'locataire_vide'
+                }
+            }
         }
-    },
-    'foyers_fiscaux': {
-        'ff1': {
-            'declarants': ['Faustine']
-        }
-    },
-    'individus': {
-        'Faustine': {
-            'salaire_imposable': {
+    }
+    
+rupture_2017 = createSituation('Faustine', {
                 '2015': 12 * 1800,
                 '2016': 12 * 1800,
                 '2017': 12 * 1000,
                 '2018': 12 * 1000,
                 '2019': 12 * 1000
-            }
-        }
-    },
-    'menages': {
-        'm1': {
-            'personne_de_reference': ['Faustine'],
-            'loyer': {
-                '2015': 12 * 500,
-                '2016': 12 * 500,
-                '2017': 12 * 500,
-                '2018': 12 * 500,
-                '2019': 12 * 500
-            },
-            'statut_occupation_logement': {
-                '2015': 'locataire_vide',
-                '2016': 'locataire_vide',
-                '2017': 'locataire_vide',
-                '2018': 'locataire_vide',
-                '2019': 'locataire_vide'
-            }
-        }
-    }
-}
+            })
 
 hausse_2017 = {
     'familles': {
@@ -86,6 +90,7 @@ hausse_2017 = {
     }
 }
 
+# Total glissant = 10 000 €
 salaire_fluctuant_mensuel = {
     '01': 800,
     '02': 500,
@@ -140,8 +145,21 @@ fluctuant_2017 = {
     }
 }
 
+# situations = {
+#     'rupture_2017': rupture_2017,
+#     'fluctuant_2017': fluctuant_2017,
+#     'hausse_2017': hausse_2017
+# }
+
+def createLevelSituation(salaire):
+    return createSituation('Jean', {
+        '2015': salaire,
+        '2016': salaire,
+        '2017': salaire,
+        '2018': salaire,
+        '2019': salaire
+    })
+
 situations = {
-    'rupture_2017': rupture_2017,
-    'fluctuant_2017': fluctuant_2017,
-    'hausse_2017': hausse_2017
+    'level_' + str(salaire) : createLevelSituation(12 * salaire) for salaire in range(0,1600,100)
 }
