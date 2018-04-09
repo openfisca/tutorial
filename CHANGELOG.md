@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.1.2 [#30](https://github.com/openfisca/tutorial/pull/30)
+
+* Add new wiki FAQ reference to README.
+
 ### 0.1.1 [#29](https://github.com/openfisca/tutorial/pull/29)
 
 * Changes names of "Réfome Paramètre" and "Réforme Variable" to use documentation compliant "Réforme paramétrique" and "Réforme structurelle".
