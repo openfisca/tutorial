@@ -51,4 +51,4 @@ with open('resultats.csv', 'w') as csvfile:
         ##### Ecrire les resultats dans le CSV
         writer.writerow(results)
 
-print 'le calcul est terminé'
+print ('le calcul est terminé')
