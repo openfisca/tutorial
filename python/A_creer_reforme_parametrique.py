@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
+# Importez OpenFisca
 import openfisca_france
-from reforme_parametrique import MaReform
+from reforme_parametrique import MaReforme
 
-####### Consulter la situation actuelle ##############
+# Consultez la situation actuelle
 legislation_france = openfisca_france.FranceTaxBenefitSystem()
 
 resultat_actuel = legislation_france.parameters.impot_revenu.bareme[1].rate
@@ -11,8 +12,8 @@ resultat_actuel = legislation_france.parameters.impot_revenu.bareme[1].rate
 print "Résultat actuel"
 print resultat_actuel
 
-####### Consulter la situation avec la reforme ##############
-legislation_reforme = MaReform(legislation_france)
+# Consultez la situation avec la reforme
+legislation_reforme = MaReforme(legislation_france)
 
 resultat_apres_reforme = legislation_reforme.parameters.impot_revenu.bareme[1].rate
 

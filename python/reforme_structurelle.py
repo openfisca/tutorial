@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+
+# Importez OpenFisca
 from openfisca_core import reforms
 from openfisca_france.model.base import *
 
-####### Décrivez votre réforme ###########
+# Décrivez votre réforme
 
 # Cette partie décrit les changements
 class base_ressource_mensuelle_individu(Variable):
@@ -23,6 +25,6 @@ class base_ressource_mensuelle_individu(Variable):
         )
 
 # Cette partie rassemble les changements dans une seule réforme appelée ici MaReforme
-class MaReform(reforms.Reform):
+class MaReforme(reforms.Reform):
     def apply(self):
         self.add_variable(base_ressource_mensuelle_individu)

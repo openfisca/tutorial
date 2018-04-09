@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from openfisca_core import reforms
-from openfisca_core import periods
+
+# Importez OpenFisca
+from openfisca_core import reforms, periods
 from openfisca_france.model.base import *
 
 # Question : 'indemnites_journalieres_imposables' semble dire que certaines indemnités journalières ne sont imposables qu'à 50%, doit on prendre 50% de ces montants ?
@@ -30,11 +31,11 @@ class base_ressource_mensuelle_individu(Variable):
         indemnites_journalieres_maladie = individu('indemnites_journalieres_maladie', period)
         # indemnites_journalieres_maladie_professionnelle = individu('indemnites_journalieres_maladie_professionnelle, period)', period)
         indemnites_journalieres_accident_travail = individu('indemnites_journalieres_accident_travail', period)
-        
+
         indemnites_chomage_partiel = individu('indemnites_chomage_partiel', period)
         indemnites_volontariat = individu('indemnites_volontariat', period)
         indemnite_fin_contrat_net = individu('indemnite_fin_contrat_net', period)
-        
+
         dedommagement_victime_amiante = individu('dedommagement_victime_amiante', period)
         pensions_alimentaires_percues = individu('pensions_alimentaires_percues', period)
         pensions_alimentaires_versees_individu = individu('pensions_alimentaires_versees_individu', period)
@@ -107,7 +108,7 @@ class base_ressource_mensuelle_famille(Variable):
         paje_base = famille('paje_base', period)
         paje_clca = famille('paje_clca', period)
         paje_prepare = famille('paje_prepare', period)
-        
+
         base_ressources_membres = famille.sum(famille.members('base_ressource_mensuelle_individu', period))
 
         return (
@@ -183,7 +184,7 @@ class aide_logement_base_ressources(Variable):
         )
 
 # Cette partie rassemble les changements dans une seule réforme appelée ici MaReforme
-class MaReform(reforms.Reform):
+class MaReforme(reforms.Reform):
 
     def apply(self):
         self.add_variable(base_ressource_mensuelle_individu)

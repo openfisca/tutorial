@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+
+# Importez OpenFisca
 import json
 import csv
 import os
 from openfisca_core.simulations import Simulation, SituationParsingError
 from openfisca_core.parameters import ParameterNotFound
-
 
 def run_situation(reform_name, reform, situation_json,  calculs):
     with open(situation_json) as json_data:
@@ -13,11 +14,10 @@ def run_situation(reform_name, reform, situation_json,  calculs):
 
     results = {"Situation": situation_json, "Legislation": reform_name}
 
-    ####### Initialisez la simulation (rencontre des entités avec la legislation) ##############
-
+    # Initialisez la simulation (rencontre des entités avec la legislation)
     simulation = Simulation(tax_benefit_system=reform, simulation_json=situation)
 
-    ##### Demandez l'ensemble des calculs #####
+    # Demandez l'ensemble des calculs
     for calcul, period in calculs.iteritems():
         results
         try:
@@ -55,8 +55,7 @@ def run_framework(reforms, situations, computations):
     for reform in reforms:
         resultats += run_reform(reform, reforms[reform], situations, computations)
 
-    ##### Initialiser le fichier CSV pour export Excel ######
-
+    # Initialisez le fichier CSV pour export Excel
     with open('resultats.csv', 'w') as csvfile:
         fieldnames = ['Legislation', 'Situation'] + list(computations)
         # Situation, Variable, Period, Value
@@ -71,7 +70,3 @@ def run_framework(reforms, situations, computations):
             writer.writerow(result)
 
     print 'le calcul est terminé'
-
-
-
-

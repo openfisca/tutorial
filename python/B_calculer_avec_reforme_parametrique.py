@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
+# Importez OpenFisca
 import openfisca_france
 from openfisca_core.simulations import Simulation
-from reforme_parametrique import MaReform
+from reforme_parametrique import MaReforme
 
-
-
-####### Décrivez les entités ###########
+# Décrivez les entités
 situation = {
   "familles": {
     "famille_1": {
@@ -59,7 +58,7 @@ situation = {
   }
 }
 
-####### Calcule la situation actuelle de la legislation française ##############
+# Calculez la situation actuelle de la legislation française
 legislation_france = openfisca_france.FranceTaxBenefitSystem()
 simulation_actuelle = Simulation(tax_benefit_system=legislation_france, simulation_json=situation)
 
@@ -70,8 +69,8 @@ resultat_actuel = simulation_actuelle.calculate('impots_directs', '2017')
 print "Résultat actuel"
 print resultat_actuel
 
-####### Calcule la situation avec la réforme ##############
-legislation_reforme = MaReform(legislation_france)
+# Calculez la situation avec la réforme
+legislation_reforme = MaReforme(legislation_france)
 simulation_reforme = Simulation(tax_benefit_system=legislation_reforme, simulation_json=situation)
 
 # Insérez ci-dessous la variable que vous souhaitez calculer (ex : 'impots_directs')

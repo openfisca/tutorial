@@ -1,23 +1,14 @@
 # -*- coding: utf-8 -*-
 
-####### Importez OpenFisca  ###########
-
+# Importez OpenFisca
 import openfisca_france
 from openfisca_core.simulations import Simulation
 import json
 import csv
-
-
 from clean_mes_aides_situations import normalize
-
-####### Listez les entités ###########
-
-# -*- coding: utf-8 -*-
-
 from os import listdir
 from os.path import isfile, join
 from pprint import pprint
-
 
 # Test abattement
 #
@@ -41,11 +32,9 @@ situations_json = [
 
 pprint(situations_json)
 
-####### Listez les calculs à effectuer et les periodes sur lequels les calculer ###########
-
+# Listez les calculs à effectuer et les periodes sur lequels les calculer
 
 jan18 = '2018-01'
-
 
 toremove = {
     'familles': {
@@ -108,7 +97,6 @@ calculs = {
     'rev_coll': ['2016', '2017', '2018']
 }
 
-
 fieldnames = ['Situation']
 
 for calcul, periods in calculs.iteritems():
@@ -119,8 +107,7 @@ for calcul, periods in calculs.iteritems():
 
 fieldnames = ['Situation', 'Period', 'Variable', 'Value']
 
-##### Initialiser le fichier CSV pour export Excel ######
-
+# Initialisez le fichier CSV pour export Excel
 with open('resultats.csv', 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
@@ -133,12 +120,12 @@ with open('resultats.csv', 'w') as csvfile:
         pprint(situation_json)
         results = {'Situation': situation_json}
 
-        ####### Initialisez la simulation (rencontre des entités avec la legislation) ##############
+        # Initialisez la simulation (rencontre des entités avec la legislation)
 
         legislation_france = openfisca_france.FranceTaxBenefitSystem()
         simulation_actuelle = Simulation(tax_benefit_system=legislation_france, simulation_json=removeComputedValues(normalize(situation)))
 
-        ##### Demandez l'ensemble des calculs #####
+        # Demandez l'ensemble des calculs
         for calcul, periods in calculs.iteritems():
             results['Variable'] = calcul
             for period in periods:
