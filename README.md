@@ -37,6 +37,6 @@ You can use them 'as is' in the web API or import them in the python API as show
 
 To run one of the following scripts, go to its directory an call it with the `python` command.
 
-### [Frequently Asked Questions](./FAQ.md)
+### [Frequently Asked Questions (in French)](./FAQ.md)
 
-This page (in French) provides solutions for some technical issues experienced by users on Python tutorial for OpenFisca France.
+This page provides solutions for some technical issues experienced by users on Python tutorial for OpenFisca France.
