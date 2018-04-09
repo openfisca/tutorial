@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.1.3 [#31](https://github.com/openfisca/tutorial/pull/31)
+
+* Normalises comments
+* Details:
+  - Adds accents where appropriate
+  - Normalise new lines
+  - Rename `MaReform` to `MaReforme` (as in the comments)
+  - Conjugate all comments to the plural second person
+
 ### 0.1.2 [#30](https://github.com/openfisca/tutorial/pull/30)
 
 * Add new wiki FAQ reference to README.
