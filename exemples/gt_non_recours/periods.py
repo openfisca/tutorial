@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 years = [str(y).zfill(2) for y in range(2015, 2020)]
 monthIds = [ str(m).zfill(2) for m in range(1,13) ]
