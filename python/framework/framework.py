@@ -12,7 +12,7 @@ reformes = {
 }
 
 # Listez les entités
-situations = "situations/"
+situations = "../situations/"
 
 # Listez les calculs à effectuer et les périodes sur lequelles les calculer
 period_month = '2018-02'
