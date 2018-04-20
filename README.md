@@ -45,4 +45,4 @@ For technical tips on Python environment, see its [FAQ](https://github.com/openf
 ## Examples
 
 Real applications of OpenFisca:
-* [French] Working group on rights and services access, fighting against non-uptake of social assistance in `./exemples/gt_non_recours`  
+* [French] Working group on rights and services access, fighting against non-uptake of social assistance in [./exemples/gt_non_recours](./exemples/gt_non_recours).

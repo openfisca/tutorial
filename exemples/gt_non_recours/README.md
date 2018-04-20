@@ -1,19 +1,22 @@
 ## Supports du Groupe de Travail de lutte contre le non recours
   
  > Supports du GT `Accès aux droits et aux services, lutte contre le non recours`  
- de la `Délégation Interministérielle à la prévention et à la lutte contre la pauvreté des enfants et des jeunes`
+ de la `Délégation Interministérielle à la prévention et à la lutte contre la pauvreté des enfants et des jeunes`  
  Le rapport de ce Groupe de Travail est accessible [ici](https://www.caissedesdepotsdesterritoires.fr/cs/BlobServer?blobkey=id&blobnocache=true&blobwhere=1250171076233&blobheader=application%2Fpdf&blobcol=urldata&blobtable=MungoBlobs).
 
+### Description du contenu
 
-Le script `framework_no_reform/investiguer_achetypes.py` execute un ensemble de calculs sur une ou plusieurs periodes et sur les situations contenues dans `/situations`.  
+* Le script `framework_no_reform/investiguer_achetypes.py` execute un ensemble de calculs sur une ou plusieurs periodes et sur les situations contenues dans `/situations`.  
 Les resultats sont repertoriés dans un fichier `csv`.
 
-Le script `framework.py` exécute un ensemble de calculs de variables OpenFisca, d'après un ensemble de réformes sur les situations contenues dans `/situations`.  
+* Le script `framework.py` exécute un ensemble de calculs de variables OpenFisca, d'après un ensemble de réformes sur les situations contenues dans `/situations`.  
 Les resultats sont repertoriés dans un fichier `csv`.
 
-Le code `vizu.R` en langage [R](https://www.r-project.org) génère des courbes à partir des résultats du `framework.py`.
+* Le code `vizu.R` en langage [R](https://www.r-project.org) génère des courbes à partir des résultats `resultats-levels-.csv` du `framework.py`.
 
-### Installation pour l'exécution de `vizu.R`
+### Installation & exécution de `vizu.R`
+
+Les résultats OpenFisca présentés au GT comprennent des graphiques générés à partir de `vizu.R`. Celui-ci nécessite un environnement spécifique au langage [R](https://www.r-project.org) pour être exécuté :
 
 1. Installer la version 3+ du langage R :  
 Consulter [cran.rstudio.com](https://cran.rstudio.com), accéder au fichier à télécharger pour votre système d'exploitation et suivre les instructions associées.
@@ -26,7 +29,7 @@ Consulter [cran.rstudio.com](https://cran.rstudio.com), accéder au fichier à t
 
 2. Installer [RStudio](https://www.rstudio.com/products/rstudio/download/#download) version `1.1.442` (ou autre version compatible avec R version 3).
 
-3. Ouvrir l'application RStudio et, dans la `Console` en bas d'interface, vérifier la version de code R prise en compte avec la commande `version`.
+3. Ouvrir l'application RStudio et, dans la `Console` en bas d'interface, la version de code R prise en compte avec la commande `version` doit être en `3.x.x` :
 
     Par exemple, lors du GT, voici la configuration employée :
     ```R
@@ -48,7 +51,11 @@ Consulter [cran.rstudio.com](https://cran.rstudio.com), accéder au fichier à t
     nickname       Bug in Your Hair
     ```
 
-4. Dans RStudio, ouvrir le fichier `vizu.R` et installer ses dépendances en entrant les instructions suivantes dans la `Console` :
+4. Dans RStudio, spécifier le répertoire de travail à partir duquel les chemins de fichiers seront calculés : dans le menu `Session`, choisir `Set Working Directory` > `Choose Directory...` et indiquer le répertoire `./exemples/gt_non_recours` où se trouve le code R `vizu.R`.
+
+5. Ouvrir le fichier `vizu.R` et préciser son encodage en choisissant `UTF-8` dans le menu `File` > `Save with Encoding...`.
+
+6. Installer les dépendances de `vizu.R` en entrant les instructions suivantes dans la `Console` :
 
     ```R
     install.packages('readr')
@@ -57,4 +64,6 @@ Consulter [cran.rstudio.com](https://cran.rstudio.com), accéder au fichier à t
     install.packages('ggplot2')
     ```
 
-5. Exécuter `vizu.R` en sélectionnant tout le contenu du fichier puis en cliquant sur le bouton `Run` (sur la barre d'en-tête du fichier).
+6. Exécuter `vizu.R` en sélectionnant tout le contenu du fichier puis en cliquant sur le bouton `Run` (sur la barre d'en-tête du fichier).
+
+7. Consulter le résultat du calcul sur l'onglet `Plots`.
