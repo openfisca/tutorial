@@ -1,7 +1,8 @@
 ## 01-03/2018 - Supports du Groupe de Travail de lutte contre le non recours
   
- > Supports du GT `Accès aux droits et aux services, lutte contre le non recours`  
- de la `Délégation Interministérielle à la prévention et à la lutte contre la pauvreté des enfants et des jeunes`  
+ Supports du GT `Accès aux droits et aux services, lutte contre le non recours`  
+ de la `Délégation Interministérielle à la prévention et à la lutte contre la pauvreté des enfants et des jeunes`.
+
  Le rapport de ce Groupe de Travail est accessible [ici](https://www.caissedesdepotsdesterritoires.fr/cs/BlobServer?blobkey=id&blobnocache=true&blobwhere=1250171076233&blobheader=application%2Fpdf&blobcol=urldata&blobtable=MungoBlobs).
 
 ### Description du contenu
@@ -11,7 +12,27 @@ Les resultats sont repertoriés dans un fichier `csv`.
 
 * Le code `vizu.R` en langage [R](https://www.r-project.org) génère des courbes à partir des résultats `resultats-levels-.csv` du `framework.py`.
 
+
+### Installation & exécution de `framework.py`
+
+Le framework python fait appel à OpenFisca-France. Afin d'installer les librairies python dont il dépend, dans le répertoire `exemples/gt_non_recours/` exécuter :
+```sh
+make install
+```
+L'installation doit s'achever sans erreur.
+
+
+Pour exécuter le framework, dans le répertoire `exemples/gt_non_recours/`, supprimer les résultats antérieurs et (re)démarrer le calcul avec les commandes suivantes :
+```sh
+make clean
+make run
+```
+Le calcul doit s'achever sans erreur.
+Un fichier `resultats-levels-.csv` contenant l'ensemble des valeurs demandées apparaît dans `exemples/gt_non_recours/`.
+
 ### Installation & exécution de `vizu.R`
+
+Pour utiliser le code `vizu.R`, il faut avoir généré `resultats-levels-.csv` à partir de `framework.py` (voir description ci-dessus).
 
 Les résultats OpenFisca présentés au GT comprennent des graphiques générés à partir de `vizu.R`. Celui-ci nécessite un environnement spécifique au langage [R](https://www.r-project.org) pour être exécuté :
 

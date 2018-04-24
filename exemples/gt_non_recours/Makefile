@@ -11,4 +11,5 @@ run:
 	python framework.py
 
 clean:
+	rm -i *csv;
 	find . -name '*.pyc' -exec rm \{\} \;
