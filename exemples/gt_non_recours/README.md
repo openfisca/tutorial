@@ -15,7 +15,9 @@ Les resultats sont repertoriés dans un fichier `csv`.
 
 ### Installation & exécution de `framework.py`
 
-Le framework python fait appel à OpenFisca-France. Afin d'installer les librairies python dont il dépend, dans le répertoire `exemples/gt_non_recours/` exécuter :
+Le framework est développé en [python](https://www.python.org) et dépend de la version 2.7 de ce langage (cf. `runtime.txt`).
+
+Il fait appel à OpenFisca-France. Afin d'installer les librairies python dont il dépend, dans le répertoire `exemples/gt_non_recours/` exécuter :
 ```sh
 make install
 ```
