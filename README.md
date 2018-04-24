@@ -23,6 +23,8 @@ With the Python [tutorials](./python/) (in French), you will learn how to:
 - get results on the current legislation as well as on [reforms](http://openfisca.org/doc/reforms.html)
 - export results to .csv files
 
+For more information, see this [README](./python/README.md) (in French).
+
 ### [Situations for OpenFisca-France](./python/situations)
 
 This directory contains pre-filled input data, called situations, extracted from the French ["Livret du pouvoir d'achat"](https://www.economie.gouv.fr/files/files/PLF2018/bro-pouvoir-achat-bat-web-10h.pdf).
@@ -44,5 +46,5 @@ For technical tips on Python environment, see its [FAQ](https://github.com/openf
 
 ## Examples
 
-Real applications of OpenFisca:
+OpenFisca use cases:
 * [French] Working group on rights and services access, fighting against non-uptake of social assistance in [./exemples/gt_non_recours](./exemples/gt_non_recours).
