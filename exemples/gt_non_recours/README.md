@@ -47,7 +47,7 @@ Consulter [cran.rstudio.com](https://cran.rstudio.com), accéder au fichier à t
 
 2. Installer [RStudio](https://www.rstudio.com/products/rstudio/download/#download) version `1.1.442` (ou autre version compatible avec R version 3).
 
-3. Ouvrir l'application RStudio et, dans la `Console` en bas d'interface, la version de code R prise en compte avec la commande `version` doit être en `3.x.x` :
+3. Ouvrir l'application RStudio et, dans l'onglet `Console`, la version de code R prise en compte avec la commande `version` doit être en `3.x.x` :
 
     Par exemple, lors du GT, voici la configuration employée :
     ```R
@@ -70,6 +70,8 @@ Consulter [cran.rstudio.com](https://cran.rstudio.com), accéder au fichier à t
     ```
 
 4. Dans RStudio, spécifier le répertoire de travail à partir duquel les chemins de fichiers seront calculés : dans le menu `Session`, choisir `Set Working Directory` > `Choose Directory...` et indiquer le répertoire `./exemples/gt_non_recours` où se trouve le code R `vizu.R`.
+
+    <img src="./img/rstudio_set_working_dir.png" alt="RStudio session menu" height="50%" width="50%">
 
 5. Ouvrir le fichier `vizu.R` et préciser son encodage en choisissant `UTF-8` dans le menu `File` > `Save with Encoding...`.
 
