@@ -15,7 +15,12 @@ Les resultats sont repertoriés dans un fichier `csv`.
 
 ### Installation & exécution de `framework.py`
 
-Le framework est développé en [python](https://www.python.org) et dépend de la version 2.7 de ce langage (cf. `runtime.txt`).
+Le framework est développé en langage [python](https://www.python.org) `2.7`. Vérifiez votre version de python grâce à la commande suivante :
+```sh
+python --version
+# Résultat attendu : Python 2.7.x
+```
+
 
 Il fait appel à OpenFisca-France. Afin d'installer les librairies python dont il dépend, dans le répertoire `exemples/gt_non_recours/` exécuter :
 ```sh
