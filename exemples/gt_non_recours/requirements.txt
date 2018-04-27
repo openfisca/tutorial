@@ -1,0 +1,2 @@
+# GT non recours - Environment dependencies
+OpenFisca-France >= 20.0.0, < 21.0

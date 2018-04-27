@@ -18,10 +18,12 @@ Just click here to start:
 
 ### [Python tutorials for OpenFisca-France](./python/)
 
-With the Python [Tutorials](./python/) (in French), you will learn how to:
+With the Python [tutorials](./python/) (in French), you will learn how to:
 - use the python API to run calculations
-- get results on the current legislation as well as on reforms
+- get results on the current legislation as well as on [reforms](http://openfisca.org/doc/reforms.html)
 - export results to .csv files
+
+For more information, see this [README](./python/README.md) (in French).
 
 ### [Situations for OpenFisca-France](./python/situations)
 
@@ -41,3 +43,8 @@ To run one of the following scripts, go to its directory an call it with the `py
 
 A wiki provides additional information to this `tutorial` repository.  
 For technical tips on Python environment, see its [FAQ](https://github.com/openfisca/tutorial/wiki/FAQ) (in French).
+
+## Examples
+
+OpenFisca use cases:
+* [French] Working group on rights and services access, fighting against non-uptake of social assistance in [./exemples/gt_non_recours](./exemples/gt_non_recours).

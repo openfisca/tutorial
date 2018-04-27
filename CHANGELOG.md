@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 [#33](https://github.com/openfisca/tutorial/pull/33)
+
+* Update GT non recours content to represent full openfisca analysis
+* Details:
+  - Add GT non recours adapted framework in `exemples/gt_non_recours/` (python and R code)
+  - Keep generic tutorial framework in `python/framework/`
+
 ### 0.1.3 [#31](https://github.com/openfisca/tutorial/pull/31)
 
 * Normalises comments
