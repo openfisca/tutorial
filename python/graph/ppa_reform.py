@@ -20,10 +20,12 @@ class MaReform(reforms.Reform):
     def apply(self):
         self.modify_parameters(modifier_function = modifier_un_parametre)
 
-reforme_param = MaReform(FranceTaxBenefitSystem())
 
 france = {'systeme':FranceTaxBenefitSystem(), 'calculs':['salaire_net', 'ppa'], 'name': 'actuel'}
+
+reforme_param = MaReform(FranceTaxBenefitSystem())
 ppa_reforme={'systeme':reforme_param, 'calculs':['ppa'], 'name': 'reforme'}
+
 tbs = [france, ppa_reforme]
 data_frame = pandas.DataFrame()
 
@@ -56,5 +58,4 @@ def calcul_ppa_et_salaire(calculs_tbs, data_frame_panda):
         data_frame_panda[calcul_name]=simulation.calculate(calcul, period = decembre)
 
 for system in tbs:
-    calcul_ppa_et_salaire(system,data_frame)
-print (data_frame)
+    calcul_ppa_et_salaire(system, data_frame)

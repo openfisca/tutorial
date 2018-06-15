@@ -22,7 +22,7 @@ app.layout = html.Div(children=[
     html.H3("PPA hier et aujourd'hui"),
     dcc.Graph(
         id='example',
-        figure=reform_to_graph.display_bareme(30, '2015-01')
+        figure=reform_to_graph.generate_graph()
     )
 ])
 

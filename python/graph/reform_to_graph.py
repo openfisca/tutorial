@@ -7,39 +7,20 @@ from openfisca_france import FranceTaxBenefitSystem
 import plotly.plotly as py
 import plotly.graph_objs as go
 
+from ppa_reform import data_frame 
 
-tbs = FranceTaxBenefitSystem()
+print data_frame
 
-
-def display_bareme(age, period):
-    scenario_params = {
-        "period": period,
-        "parent1": {
-            "age": age,
-        },
-        "axes": [
-            dict(
-                count = 10,
-                min = 0,
-                max = 30000,
-                name = 'salaire_de_base',
-            ),
-        ],
-    }
-    scenario = tbs.new_scenario().init_single_entity(**scenario_params)
-    simulation = scenario.new_simulation()
-    ppa = simulation.calculate("ppa", period)
-
-    print(ppa)
+def generate_graph():
     trace1 = go.Scatter(
-        x=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        y=ppa,
-        fill='ppa'
+        x=data_frame['actuel_salaire_net'],
+        y=data_frame['actuel_ppa'],
+        fill='ppa actuelle'
     )
     trace2 = go.Scatter(
-        x=[1, 2, 3, 4],
-        y=[3, 5, 1, 7],
-        fill='bidon'
+        x=data_frame['actuel_salaire_net'],
+        y=data_frame['reforme_ppa'],
+        fill='reforme de la ppa'
     )
     data = [trace1, trace2]
     return go.Figure(data=data)
