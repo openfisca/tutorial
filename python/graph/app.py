@@ -12,15 +12,15 @@ import dash_core_components as dcc
 import pandas as pd
 import plotly.graph_objs as go
 
+import reform_to_graph
+
 
 app = dash.Dash()
 
 # data for plots
-df = pd.read_csv(
-    'https://gist.githubusercontent.com/chriddyp/' +
-    '5d1ea79569ed194d432e56108a04d188/raw/' +
-    'a9f9e8076b837d541398e999dcbac2b2826a81f8/'+
-    'gdp-life-exp-2007.csv')
+# src: https://gist.githubusercontent.com/chriddyp/5d1ea79569ed194d432e56108a04d188/
+# raw/a9f9e8076b837d541398e999dcbac2b2826a81f8/gdp-life-exp-2007.csv
+df = pd.read_csv('./gdp-life-exp-2007.csv')
 
 
 app.layout = html.Div(children=[
@@ -70,7 +70,14 @@ app.layout = html.Div(children=[
                 hovermode='closest'
             )
         }
-    )
+    ),
+
+    html.H2('of-example'),
+    dcc.Graph(
+        id='example',
+        figure=reform_to_graph.display_bareme(30, '2015-01')
+    ),
+    
 ])
 
 if __name__ == '__main__':
