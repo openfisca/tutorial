@@ -24,6 +24,12 @@ app.layout = html.Div(children=[
         id='example',
         figure=reform_to_graph.generate_graph()
     )
+
+    # slider jouant sur le taux de dégressivité 
+    # = 1 - parameters.prestations.minima_sociaux.ppa.pente
+    # faire varier le taux de dégressivité entre [0, 1]
+
+    # un menu permettant de sélectionner la situation et d'afficher le résultat sur la ppa
 ])
 
 if __name__ == '__main__':
