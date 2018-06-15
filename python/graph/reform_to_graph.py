@@ -39,7 +39,7 @@ def display_bareme(age, period):
     trace2 = go.Scatter(
         x=[1, 2, 3, 4],
         y=[3, 5, 1, 7],
-        fill='tonexty'
+        fill='bidon'
     )
     data = [trace1, trace2]
     return go.Figure(data=data)
