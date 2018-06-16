@@ -13,7 +13,7 @@ class MaReform(reforms.Reform):
         self.modify_parameters(modifier_function=self.modifier_un_parametre)
 
     def modifier_un_parametre(self, parameters):
-        print("modifier_un_parametre > " + str(self.ppa_pente))
+        print("modifier_un_parametre: {}".format(self.ppa_pente))
 
         # Ceci décrit la periode sur laquelle va s'appliquer ce changement
         reform_year = 2018
@@ -53,8 +53,15 @@ def calcul_ppa_et_salaire(tbs):
 def precalculate(france_tbs):
     results = {}
     results[("france", None)] = calcul_ppa_et_salaire(france_tbs)
-    for ppa_pente_int in range(0, 100, 10):
+    for ppa_pente_int in range(0, 101, 10):  # 101 because the highest bound is excluded, and we want to include 100
         ppa_pente = ppa_pente_int / 100.
         reform_tbs = MaReform(france_tbs, ppa_pente)
-        results[("reform", ppa_pente)] = calcul_ppa_et_salaire(reform_tbs)
+        results[("reform", ppa_pente_int)] = calcul_ppa_et_salaire(reform_tbs)
     return results
+
+
+def values_for_ppa_pente(results, ppa_pente_int):
+    salaire_net = results[("france", None)]["salaire_net"]
+    france_ppa = results[("france", None)]["ppa"]
+    reform_ppa = results[("reform", ppa_pente_int)]["ppa"]
+    return [salaire_net, france_ppa, reform_ppa]

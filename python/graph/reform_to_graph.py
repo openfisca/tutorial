@@ -5,20 +5,18 @@ from openfisca_core import periods
 import plotly.plotly as py
 import plotly.graph_objs as go
 
-# print data_frame
 
-
-def generate_graph__ppa(data_frame):
+def generate_graph__ppa(salaire_net, france_ppa, reform_ppa):
     trace1 = go.Scatter(
         name="Législation actuelle",
-        x=data_frame['actuel_salaire_net'],
-        y=data_frame['actuel_ppa'],
+        x=salaire_net,
+        y=france_ppa,
         # fill='tonexty'
     )
     trace2 = go.Scatter(
         name="Réforme",
-        x=data_frame['actuel_salaire_net'],
-        y=data_frame['reforme_ppa'],
+        x=salaire_net,
+        y=reform_ppa,
         # fill='tozeroy'
     )
     data = [trace1, trace2]
