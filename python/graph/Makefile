@@ -8,7 +8,8 @@ install:
 	pip install dash-html-components==0.11.0  # HTML components
 	pip install dash-core-components==0.23.0  # Supercharged components
 	pip install plotly --upgrade  # Latest Plotly graphing library
-	pip install OpenFisca-France<22.0.0
+	pip install OpenFisca-France
+	pip install pandas
 
 clean:
 	find . -name '*.pyc' -exec rm \{\} \;
