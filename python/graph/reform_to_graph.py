@@ -7,11 +7,14 @@ from openfisca_france import FranceTaxBenefitSystem
 import plotly.plotly as py
 import plotly.graph_objs as go
 
-from ppa_reform import data_frame 
+from ppa_reform import nouvelle_reforme 
 # print data_frame
 
 
-def generate_graph():
+def generate_graph(ppa_pente):
+    print("generate_graph > " + str(ppa_pente))
+    data_frame = nouvelle_reforme(ppa_pente)
+
     trace1 = go.Scatter(
         name="Législation actuelle",
         x=data_frame['actuel_salaire_net'],

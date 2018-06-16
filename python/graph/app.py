@@ -12,13 +12,16 @@ import dash_core_components as dcc
 import reform_to_graph
 
 
+DEFAULT_TAUX_DEGRESSIVITE_PPA = 0.5
+
 app = dash.Dash()
+app.title = '#datFin #214'
 
 # To serve offline, uncomment these lines and check for css dependency:
 # app.css.config.serve_locally = True
 # app.scripts.config.serve_locally = True
 app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
-app.title = '#datFin #214'
+
 # <link rel="stylesheet" type="text/css" href="/css/main.css">
 app.layout = html.Div(children=[
     html.H2(children='#dataFin - Simule ton amendement'),
@@ -40,13 +43,13 @@ app.layout = html.Div(children=[
             min=0,
             max=100,
             step=10,
-            value=50,
+            value=DEFAULT_TAUX_DEGRESSIVITE_PPA * 100,
         ),
     ], style={'width': '33%'}),
 
     dcc.Graph(
         id='area-chart',
-        figure=reform_to_graph.generate_graph()
+        figure=reform_to_graph.generate_graph(DEFAULT_TAUX_DEGRESSIVITE_PPA)
     )
 
 
@@ -55,7 +58,15 @@ app.layout = html.Div(children=[
 
 @app.callback(Output('taux-degressivite-ppa-value', 'children'), [Input('taux-degressivite-ppa', 'value')])
 def display_taux_degressivite_ppa(taux_degressivite_ppa):
-    return taux_degressivite_ppa / 100. 
+    taux_degressivite_ppa = (taux_degressivite_ppa / 100.)
+    return taux_degressivite_ppa
+
+@app.callback(Output('area-chart', 'figure'), [Input('taux-degressivite-ppa', 'value')])
+def calculate_ppa(taux_degressivite_ppa):
+    taux_degressivite_ppa = (taux_degressivite_ppa / 100.)
+
+    print("calculate_ppa > " + str(taux_degressivite_ppa)) 
+    return reform_to_graph.generate_graph(taux_degressivite_ppa)
 
 
 if __name__ == '__main__':
