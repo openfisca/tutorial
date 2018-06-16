@@ -44,16 +44,19 @@ def calcul_ppa_et_salaire(tbs):
     simulation = scenario.new_simulation()
 
     result_by_variable_name = {}
-    for variable_name in ['salaire_net', 'ppa']:
+    for variable_name in ['salaire_net', 'ppa', 'rsa']:
         result_by_variable_name[variable_name] = simulation.calculate(variable_name, period=decembre)
-
+    
+    for variable_name in ['revenu_disponible']:
+        result_by_variable_name[variable_name] = simulation.calculate(variable_name, period=year) / 12
+    
     return result_by_variable_name
 
 
 def precalculate(france_tbs):
     results = {}
     results[("france", None)] = calcul_ppa_et_salaire(france_tbs)
-    for ppa_pente_int in range(0, 101, 10):  # 101 because the highest bound is excluded, and we want to include 100
+    for ppa_pente_int in range(0, 100, 10):  # 101 because the PPA starts at first 1€ revenue
         ppa_pente = ppa_pente_int / 100.
         reform_tbs = MaReform(france_tbs, ppa_pente)
         results[("reform", ppa_pente_int)] = calcul_ppa_et_salaire(reform_tbs)
@@ -63,5 +66,9 @@ def precalculate(france_tbs):
 def values_for_ppa_pente(results, ppa_pente_int):
     salaire_net = results[("france", None)]["salaire_net"]
     france_ppa = results[("france", None)]["ppa"]
+    
     reform_ppa = results[("reform", ppa_pente_int)]["ppa"]
-    return [salaire_net, france_ppa, reform_ppa]
+    reform_rsa = results[("reform", ppa_pente_int)]["rsa"]
+    reform_revenu_disponible = results[("reform", ppa_pente_int)]["revenu_disponible"]
+    
+    return [salaire_net, france_ppa, reform_ppa, reform_rsa, reform_revenu_disponible]

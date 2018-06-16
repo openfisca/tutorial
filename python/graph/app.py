@@ -26,7 +26,8 @@ france_tbs = FranceTaxBenefitSystem()
 results = ppa_reform.precalculate(france_tbs)
 
 DEFAULT_TAUX_DEGRESSIVITE_PPA = 0.5
-DEFAULT_PPA_VALUES = ppa_reform.values_for_ppa_pente(results, ppa_pente_int=100 - (DEFAULT_TAUX_DEGRESSIVITE_PPA * 100))
+DEFAULT_PPA_PENTE_INT = 100 - (DEFAULT_TAUX_DEGRESSIVITE_PPA * 100)  # Slider doesn't work with float numbers > moving to integer
+DEFAULT_PPA_VALUES = ppa_reform.values_for_ppa_pente(results, ppa_pente_int=DEFAULT_PPA_PENTE_INT)
 
 log.debug(results)
 
@@ -67,13 +68,13 @@ app.layout = html.Div(children=[
     html.Div(children=[
         dcc.Graph(
             id='area-chart-ppa',
-            figure=reform_to_graph.generate_graph__ppa(*DEFAULT_PPA_VALUES)
+            figure=reform_to_graph.generate_graph__ppa(*DEFAULT_PPA_VALUES[:3])
         ),
 
-        # dcc.Graph(
-        #     id='area-chart-revenu-disponible',
-        #     figure=reform_to_graph.generate_graph__revenu_disponible(values)
-        # )
+        dcc.Graph(
+            id='area-chart-revenu-disponible',
+            figure=reform_to_graph.generate_graph__revenu_disponible(*DEFAULT_PPA_VALUES)
+        )
     ])
 
     # un menu permettant de sélectionner la situation et d'afficher le résultat sur la ppa
@@ -90,7 +91,14 @@ def display_taux_degressivite_ppa(taux_degressivite_ppa_int):
 def display_ppa(taux_degressivite_ppa_int):
     ppa_pente_int = 100 - taux_degressivite_ppa_int
     values = ppa_reform.values_for_ppa_pente(results, ppa_pente_int)
-    return reform_to_graph.generate_graph__ppa(*values)
+    return reform_to_graph.generate_graph__ppa(*values[:3])
+
+
+@app.callback(Output('area-chart-revenu-disponible', 'figure'), [Input('taux-degressivite-ppa', 'value')])
+def display_revenu_disponible(taux_degressivite_ppa_int):
+    ppa_pente_int = 100 - taux_degressivite_ppa_int
+    values = ppa_reform.values_for_ppa_pente(results, ppa_pente_int)
+    return reform_to_graph.generate_graph__revenu_disponible(*values)
 
 
 if __name__ == '__main__':

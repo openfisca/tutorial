@@ -2,6 +2,8 @@
 
 from openfisca_core import periods
 
+import numpy as np
+
 import plotly.plotly as py
 import plotly.graph_objs as go
 
@@ -30,39 +32,45 @@ def generate_graph__ppa(salaire_net, france_ppa, reform_ppa):
 
     return go.Figure(data=data, layout=layout)
 
-
-def generate_graph__revenu_disponible(data_frame):
+# TODO: clean france_ppa
+def generate_graph__revenu_disponible(salaire_net, france_ppa, reform_ppa, reform_rsa, reform_revenu_disponible):
     trace1 = go.Scatter(
-        name="Salaire net",
-        x=data_frame['actuel_salaire_net'],
-        y=data_frame['actuel_salaire_net'],
-        # fill='tonexty'
+        name="RSA avec réforme",
+        x=salaire_net,
+        y=reform_rsa,
+        
+        mode='lines',
+        line=dict(width=0.5,
+              color='rgb(184, 247, 212)'),
+        fill='tozeroy'
     )
+
     trace2 = go.Scatter(
-        name="RSA",
-        x=data_frame['actuel_salaire_net'],
-        y=data_frame['reforme_ppa'],
-        # fill='tozeroy'
+        name="Prime d'activité",
+        x=salaire_net,
+        y=np.array(reform_rsa) + np.array(reform_ppa),
+
+        mode='lines',
+        line=dict(width=0.5,
+              color='rgb(111, 231, 219)'),
+        fill='tozeroy'
     )
 
     trace3 = go.Scatter(
-        name="Prime d'activité",
-        x=data_frame['actuel_salaire_net'],
-        y=data_frame['reforme_ppa'],
-        # fill='tozeroy'
-    )
-
-    trace4 = go.Scatter(
         name="Revenu disponible",
-        x=data_frame['actuel_salaire_net'],
-        y=data_frame['reforme_ppa'],
+        x=salaire_net,
+        y=reform_revenu_disponible,
+        
+        mode='lines',
+        line=dict(width=0.5,
+              color='rgb(127, 166, 238)'),
         # fill='tozeroy'
     )
 
-    data = [trace1, trace2, trace3, trace4]
+    data = [trace1, trace2, trace3]
 
     layout = go.Layout(
-        title="Décomposition du revenu disponible",
+        title="Prime d'activité, RSA & Revenu disponible",
         # margin=go.Margin(l=50, r=50, b=50, t=50),
         xaxis={'title': "salaire net (€ par mois)"},
         yaxis={'title': "revenu disponible (€ par mois)"}
