@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from openfisca_core import periods, reforms
+import json
+
+from openfisca_core import periods, reforms, simulations
 
 
 class MaReform(reforms.Reform):
@@ -24,14 +26,10 @@ class MaReform(reforms.Reform):
         return parameters
 
 
-def calcul_ppa_et_salaire(tbs):
-    year = '2018'
-    decembre = '2018-12'
-
-    scenario = tbs.new_scenario().init_single_entity(
-        period=year,
-        parent1=dict(),
-        axes=[
+def build_scenario(tbs, year, scenario_specific_params):
+    scenario_generic_params = {
+        "period": year,
+        "axes": [
             dict(
                 count=20,
                 name='salaire_net',
@@ -39,7 +37,47 @@ def calcul_ppa_et_salaire(tbs):
                 min=0,
             )
         ],
-    )
+    }
+
+    scenario_params = {}
+    scenario_params.update(scenario_generic_params)
+    scenario_params.update(scenario_specific_params)
+
+    scenario = tbs.new_scenario()
+    scenario.init_single_entity(**scenario_params)
+    return scenario
+
+
+def iter_months(year, value):
+    for index in range(1, 13):
+        yield ("{}-{}".format(year, index), value)
+
+
+def calcul_ppa_et_salaire(tbs):
+    year = '2018'
+    decembre = '2018-12'
+
+    celibataire_handicap_567 = {
+        "parent1": {
+            "age": 29,
+            "date_arret_de_travail": "2018-01-30",
+            "echelon_bourse": dict(iter_months(year, -1)),
+            "gir": dict(iter_months(year, "gir_6")),
+            "handicap": dict(iter_months(year, True)),
+            "salaire_de_base": dict(iter_months(year, 726.923076923077)),
+            "statut_marital": "celibataire",
+            "taux_incapacite": dict(iter_months(year, 0.7)),
+            "tns_auto_entrepreneur_type_activite": dict(iter_months(year, "bic")),
+            "tns_autres_revenus_type_activite": dict(iter_months(year, "bic")),
+            "tns_micro_entreprise_type_activite": dict(iter_months(year, "bic")),
+        },
+        "menage": {
+            "loyer": 500,
+            "statut_occupation_logement": "locataire_vide",
+        },
+    }
+
+    scenario = build_scenario(tbs, year, celibataire_handicap_567)
     # scenario.suggest()
     simulation = scenario.new_simulation()
 
