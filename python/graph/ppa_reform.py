@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import json
 from openfisca_core import periods, reforms
-import pandas
 
-from openfisca_france import FranceTaxBenefitSystem
 
 class MaReform(reforms.Reform):
 
     def __init__(self, tax_benefit_system, ppa_pente=0.5):
         self.ppa_pente = ppa_pente
-        super(tax_benefit_system)
+        super(MaReform, self).__init__(tax_benefit_system)
 
     def apply(self):
-        self.modify_parameters(modifier_function = self.modifier_un_parametre)
+        self.modify_parameters(modifier_function=self.modifier_un_parametre)
 
     def modifier_un_parametre(self, parameters):
         print("modifier_un_parametre > " + str(self.ppa_pente))
@@ -26,24 +23,12 @@ class MaReform(reforms.Reform):
         parameters.prestations.minima_sociaux.ppa.pente.update(reform_period, value=self.ppa_pente)
         return parameters
 
-print("Chargement de la législation actuelle...")
-france = {'systeme':FranceTaxBenefitSystem(), 'calculs':['salaire_net', 'ppa'], 'name': 'actuel'}
 
-# print("Chargement de la réforme...")
-# reforme_param = MaReform(FranceTaxBenefitSystem())
-# ppa_reforme={'systeme':reforme_param, 'calculs':['ppa'], 'name': 'reforme'}
-
-# tbs = [france, ppa_reforme]
-
-def calcul_ppa_et_salaire(calculs_tbs, data_frame_panda):
-    calculs = calculs_tbs['calculs']
-    tax_benefit_system = calculs_tbs['systeme']
-    name = calculs_tbs['name']
-
-    year = 2018
+def calcul_ppa_et_salaire(tbs):
+    year = '2018'
     decembre = '2018-12'
 
-    scenario = tax_benefit_system.new_scenario().init_single_entity(
+    scenario = tbs.new_scenario().init_single_entity(
         period=year,
         parent1=dict(),
         axes=[
@@ -55,26 +40,21 @@ def calcul_ppa_et_salaire(calculs_tbs, data_frame_panda):
             )
         ],
     )
-    scenario.suggest()
-    json.dumps(scenario.to_json(), ensure_ascii=False, indent=2)
+    # scenario.suggest()
     simulation = scenario.new_simulation()
 
-    for calcul in calculs :
-        calcul_name = "{}_{}".format(name,calcul)
-        data_frame_panda[calcul_name]=simulation.calculate(calcul, period = decembre)
+    result_by_variable_name = {}
+    for variable_name in ['salaire_net', 'ppa']:
+        result_by_variable_name[variable_name] = simulation.calculate(variable_name, period=decembre)
+
+    return result_by_variable_name
 
 
-data_frame = pandas.DataFrame()
-# for system in tbs:
-#    calcul_ppa_et_salaire(system, data_frame)
-calcul_ppa_et_salaire(france, data_frame)
-
-def nouvelle_reforme(new_ppa_pente):
-    print("Nouveau chargement de la réforme...")
-    ppa_pente = new_ppa_pente
-
-    reforme_param = MaReform(FranceTaxBenefitSystem(), ppa_pente)
-    new_ppa_reforme={'systeme':reforme_param, 'calculs':['ppa'], 'name': 'reforme'}
-
-    calcul_ppa_et_salaire(new_ppa_reforme, data_frame)
-    return data_frame
+def precalculate(france_tbs):
+    results = {}
+    results[("france", None)] = calcul_ppa_et_salaire(france_tbs)
+    for ppa_pente_int in range(0, 100, 10):
+        ppa_pente = ppa_pente_int / 100.
+        reform_tbs = MaReform(france_tbs, ppa_pente)
+        results[("reform", ppa_pente)] = calcul_ppa_et_salaire(reform_tbs)
+    return results
