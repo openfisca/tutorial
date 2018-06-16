@@ -6,26 +6,25 @@ import pandas
 
 from openfisca_france import FranceTaxBenefitSystem
 
-
-ppa_pente = 0.50
-
-
-def modifier_un_parametre(parameters):
-    print("modifier_un_parametre > " + str(ppa_pente))
-    
-    # Ceci décrit la periode sur laquelle va s'appliquer ce changement
-    reform_year = 2018
-    reform_period = periods.period(reform_year)
-    
-    # Cette partie propose un changement de taux pour le barème 1 (le second) de l'impôt sur le revenu à partir du début 2017
-    parameters.prestations.minima_sociaux.ppa.pente.update(reform_period, value=ppa_pente)
-    return parameters
-
 class MaReform(reforms.Reform):
 
-    def apply(self):
-        self.modify_parameters(modifier_function = modifier_un_parametre)
+    def __init__(self, tax_benefit_system, ppa_pente=0.5):
+        self.ppa_pente = ppa_pente
+        super(tax_benefit_system)
 
+    def apply(self):
+        self.modify_parameters(modifier_function = self.modifier_un_parametre)
+
+    def modifier_un_parametre(self, parameters):
+        print("modifier_un_parametre > " + str(self.ppa_pente))
+
+        # Ceci décrit la periode sur laquelle va s'appliquer ce changement
+        reform_year = 2018
+        reform_period = periods.period(reform_year)
+
+        # Cette partie propose un changement de taux pour le barème 1 (le second) de l'impôt sur le revenu à partir du début 2017
+        parameters.prestations.minima_sociaux.ppa.pente.update(reform_period, value=self.ppa_pente)
+        return parameters
 
 print("Chargement de la législation actuelle...")
 france = {'systeme':FranceTaxBenefitSystem(), 'calculs':['salaire_net', 'ppa'], 'name': 'actuel'}
@@ -73,9 +72,9 @@ calcul_ppa_et_salaire(france, data_frame)
 def nouvelle_reforme(new_ppa_pente):
     print("Nouveau chargement de la réforme...")
     ppa_pente = new_ppa_pente
-    
-    reforme_param = MaReform(FranceTaxBenefitSystem())
+
+    reforme_param = MaReform(FranceTaxBenefitSystem(), ppa_pente)
     new_ppa_reforme={'systeme':reforme_param, 'calculs':['ppa'], 'name': 'reforme'}
-    
+
     calcul_ppa_et_salaire(new_ppa_reforme, data_frame)
     return data_frame
