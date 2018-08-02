@@ -10,7 +10,7 @@ Ces exemples en python débutent par un cas de réforme paramétrique et s'achè
 Le framework permet d'exécuter un ensemble de calculs appliqués à des situations de personnes :
 
 * Le script `framework/framework_no_reform/investiguer_achetypes.py` execute un ensemble de calculs sur une ou plusieurs periodes et sur les situations contenues dans `/situations`.  
-Les resultats sont repertoriés dans un fichier `csv`.
+Les résultats sont répertoriés dans un fichier `csv`.
 
 * Le script `framework/framework.py` exécute un ensemble de calculs de variables OpenFisca, d'après un ensemble de **réformes** sur les situations contenues dans `/situations`.  
-Les resultats sont repertoriés dans un fichier `csv`.
+Les résultats sont répertoriés dans un fichier `csv`.
