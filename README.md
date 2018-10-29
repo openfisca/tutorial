@@ -7,12 +7,19 @@ This package contains tutorials to test and explore OpenFisca.
 
 ## Notebooks
 
-The tutorial notebooks of OpenFisca offer you an overview of how to compute with this microsimulation software. Use them to explore how it works !
+The tutorial notebooks of OpenFisca offer you an overview of how to compute with this microsimulation software. Use them to explore how it works!
 
 Just click here to start:  
 [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org:/repo/openfisca/tutorial)   
 
 > This repository entails also the configuration files for the [Binder](http://mybinder.org/) which deploys a computational environment with the technology of [Jupyter](http://jupyter.org) Notebooks.
+
+To install and launch a jupyter notebook locally:
+
+```sh
+pip install jupyter
+jupyter notebook blank.ipynb
+```
 
 ## Python
 
