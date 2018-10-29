@@ -4,6 +4,9 @@ install:
 	pip install --upgrade pip pipenv
 	pipenv install --keep-outdated
 
+run:
+	pipenv run jupyter notebook
+
 test: clean
 	pipenv run python test_notebooks.py .
 

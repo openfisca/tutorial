@@ -6,6 +6,7 @@ In your console, run:
 
 ```
 make install
+make run
 ```
 
 And have fun.
