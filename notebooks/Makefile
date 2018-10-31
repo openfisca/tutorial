@@ -1,5 +1,3 @@
-#!/bin/bash
-
 all: test
 
 install:
@@ -9,4 +7,4 @@ test: clean
 	python test_notebooks.py .
 
 clean:
-	rm executed_*
+	rm -f executed_*
