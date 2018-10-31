@@ -6,7 +6,6 @@ from io import open
 
 from nbformat import read, write
 from nbconvert.preprocessors import ExecutePreprocessor, CellExecutionError
-# Other dependencies: jupyter-client, ipykernel
 
 import logging
 import traceback
@@ -16,10 +15,12 @@ import traceback
 Checks notebooks by trying to convert each one of them into a notebook that
 includes the execution results.
 
-This script is similar to this command:
-
+This script is similar to running this command:
     jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 \
                       --output executed_notebook.ipynotebook demo.ipynb
+
+on a group of notebooks. Whenever an error occurs, this script will give the user
+pretty printed output in order to fix it.
 '''
 
 
