@@ -9,7 +9,7 @@ make install
 make test
 ```
 
-If all goes according to plan, you should see a nice `OK` without any ceremonial message 😃
+If all goes according to plan, you should see a nice `OK. No error detected in tested notebook(s).` 😃
 
 Otherwise, you'll receive really handy feedback telling you where it doesn't work, and why:
 

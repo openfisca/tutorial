@@ -60,8 +60,8 @@ def run(notebook_path):
 
     except CellExecutionError:
         executed_notebook = None
-        msg = 'Error executing the notebook "%s".\n\n' % notebook_filename
-        msg += 'See notebook "%s" for stack traceback.' % notebook_filename_out
+        msg = u'Error executing the notebook "%s".\n\n' % notebook_filename
+        msg += u'See notebook "%s" for stack traceback.' % notebook_filename_out
         log.error(msg)
         raise
 
@@ -80,13 +80,14 @@ if __name__ == "__main__":
         if os.path.isdir(target):
             for file in os.listdir(target):
                 if is_notebook(file):
-                    log.debug("> " + file)
+                    log.debug(u"> " + file)
                     run(os.path.join(target, file))
         else:
             if not is_notebook(target):
                 raise Exception(u"Expected an .ipynb file. Got: {}".format(target))
             run(target)
 
+        log.info(u"OK. No error detected in tested notebook(s).")
     except BaseException as e:
         if len(sys.argv) == 1:
             log.error(u"Missing notebook or directory containing notebooks to test.")
