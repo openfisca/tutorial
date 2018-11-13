@@ -1,0 +1,7 @@
+numpy <1.15, >=1.11
+ipykernel >= 4.8
+jupyter-client >= 5.2
+nbconvert >= 5.3
+nbformat >= 4.4
+matplotlib >= 2.2
+OpenFisca-France >= 29.0.0, < 30.0
