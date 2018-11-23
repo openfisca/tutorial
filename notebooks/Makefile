@@ -1,10 +1,14 @@
 all: test
 
 install:
-	pip install -r requirements.txt
+	pip install --upgrade pip pipenv
+	pipenv install --keep-outdated
+
+run:
+	pipenv run jupyter notebook
 
 test: clean
-	python test_notebooks.py .
+	pipenv run python test_notebooks.py .
 
 clean:
 	rm -f executed_*
