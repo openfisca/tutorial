@@ -1,11 +1,20 @@
 # Tutorial Notebooks
 
-## How to test all notebooks
+## How to use the notebooks
 
 In your console, run:
 
 ```
 make install
+```
+
+And have fun.
+
+## How to test the notebooks
+
+In your console, run:
+
+```
 make test
 ```
 
