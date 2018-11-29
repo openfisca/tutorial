@@ -53,8 +53,3 @@ To run one of the following scripts, go to its directory an call it with the `py
 A wiki provides additional information to this `tutorial` repository.
 
 For technical tips on Python environment, see its [FAQ](https://github.com/openfisca/tutorial/wiki/FAQ) (in French).
-
-## Examples
-
-OpenFisca use cases:
-* [French] Working group on rights and services access, fighting against non-uptake of social assistance in [./exemples/gt_non_recours](./exemples/gt_non_recours).
