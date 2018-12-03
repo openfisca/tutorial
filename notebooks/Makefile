@@ -2,7 +2,7 @@ all: test
 
 install:
 	pip install --upgrade pip pipenv
-	pipenv install --keep-outdated
+	pipenv install --dev --keep-outdated
 
 run:
 	pipenv run jupyter notebook

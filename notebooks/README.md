@@ -1,15 +1,23 @@
 # Tutorial Notebooks
 
+## Installation
+
+In your console, go into `notebooks` directory and install dependencies with:
+
+```sh
+make install
+```
+
 ## How to use the notebooks
 
 In your console, run:
 
-```
-make install
+```sh
 make run
 ```
 
-And have fun.
+See the new page opened in your default browser and have fun. 😃  
+Then, to stop Jupyter Notebook server, use Control-C.
 
 ## How to test the notebooks
 
@@ -19,7 +27,7 @@ In your console, run:
 make test
 ```
 
-If all goes according to plan, you should see a nice `OK. No error detected in tested notebook(s).` 😃
+If all goes according to plan, you should see a nice `OK. No error detected in tested notebook(s).`
 
 Otherwise, you'll receive really handy feedback telling you where it doesn't work, and why:
 

@@ -1,0 +1,44 @@
+# CircleCI 2.0 configuration file. See <https://circleci.com/docs/2.0/language-python/>.
+version: 2
+jobs:
+  test_notebooks:
+    working_directory: ~/tutorial/notebooks
+
+    docker:
+      - image: python:3.7
+
+    steps:
+      - checkout:
+          path: ~/tutorial
+
+      - restore_cache:
+          key: v2-{{ checksum "Pipfile.lock" }}
+
+      - run:
+          name: Create a virtualenv
+          command: |
+            mkdir -p venv
+            python -m venv venv
+
+      - run:
+          name: Install dependencies
+          command: |
+            source venv/bin/activate
+            make install
+
+      - run:
+          name: Test notebooks
+          command:
+            source venv/bin/activate
+            make test
+
+      - save_cache:
+          key: v2-{{ checksum "Pipfile.lock" }}
+          paths:
+            - venv
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test_notebooks
