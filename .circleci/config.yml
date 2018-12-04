@@ -11,31 +11,13 @@ jobs:
       - checkout:
           path: ~/tutorial
 
-      - restore_cache:
-          key: v2-{{ checksum "Pipfile.lock" }}
-
-      - run:
-          name: Create a virtualenv
-          command: |
-            mkdir -p venv
-            python -m venv venv
-
       - run:
           name: Install dependencies
-          command: |
-            source venv/bin/activate
-            make install
+          command: make install
 
       - run:
           name: Test notebooks
-          command:
-            source venv/bin/activate
-            make test
-
-      - save_cache:
-          key: v2-{{ checksum "Pipfile.lock" }}
-          paths:
-            - venv
+          command: make test
 
 workflows:
   version: 2
