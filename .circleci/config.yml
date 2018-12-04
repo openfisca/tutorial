@@ -47,4 +47,4 @@ workflows:
       - edge:
           filters:
             branches:
-              only: master
+              only: stable-edge-37
