@@ -17,14 +17,6 @@
     },
     "default": {},
     "develop": {
-        "appnope": {
-            "hashes": [
-                "sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0",
-                "sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71"
-            ],
-            "markers": "sys_platform == 'darwin'",
-            "version": "==0.1.0"
-        },
         "babel": {
             "hashes": [
                 "sha256:6778d85147d5d85345c14a26aada5e478ab04e39b078b0745ee6870c2b5cf669",
@@ -115,11 +107,11 @@
         },
         "ipython": {
             "hashes": [
-                "sha256:a5781d6934a3341a1f9acb4ea5acdc7ea0a0855e689dbe755d070ca51e995435",
-                "sha256:b10a7ddd03657c761fc503495bc36471c8158e3fc948573fb9fe82a7029d8efd"
+                "sha256:6a9496209b76463f1dec126ab928919aaf1f55b38beb9219af3fe202f6bbdd12",
+                "sha256:f69932b1e806b38a7818d9a1e918e5821b685715040b48e59c657b3c7961b742"
             ],
             "markers": "python_version >= '3.3'",
-            "version": "==7.1.1"
+            "version": "==7.2.0"
         },
         "ipython-genutils": {
             "hashes": [
@@ -353,18 +345,18 @@
         },
         "openfisca-core": {
             "hashes": [
-                "sha256:a58e23480bc44a0e28d7a1a71391ea77889906fa4c3bcb911cff4b457617e257",
-                "sha256:f11e695869ba82c25a527720d412b1b3c2c86457cb49ec79f8b5dd47accda28f"
+                "sha256:b662fdaecfa7c2b5cef03bec880ea4f7f87fc741e27d930d3e6ed5b3c82e4bf4",
+                "sha256:d0cd834292084fa815c5fcd2591d258322920b55071a2debd7653089b8f6d06d"
             ],
-            "version": "==24.9.7"
+            "version": "==24.10.0"
         },
         "openfisca-france": {
             "hashes": [
-                "sha256:6d0d0d46889540e8aa261cce753919b17dc8a0db1bed342c22478fb4c535ad78",
-                "sha256:b9eece1f34b140b41f884ec05f10f606257223d8bc52d6e69e225cd3387cb4a9"
+                "sha256:5e3bdeeba5b35521aea32facb91383484320d7bff8b564a79b1122a3356c6a69",
+                "sha256:a3b623f08708cfd65bede9a5248b27f0992ff7dc69199cd50d76c9eef33c621d"
             ],
             "index": "pypi",
-            "version": "==29.4.1"
+            "version": "==32.1.0"
         },
         "pandocfilters": {
             "hashes": [
@@ -434,10 +426,10 @@
         },
         "pygments": {
             "hashes": [
-                "sha256:78f3f434bcc5d6ee09020f92ba487f95ba50f1e3ef83ae96b9d5ffa1bab25c5d",
-                "sha256:dbae1046def0efb574852fab9e90209b23f556367b5a320c0bcb871c77c3e8cc"
+                "sha256:6301ecb0997a52d2d31385e62d0a4a4cf18d2f2da7054a5ddad5c366cd39cee7",
+                "sha256:82666aac15622bd7bb685a4ee7f6625dd716da3ef7473620c192c0168aae64fc"
             ],
-            "version": "==2.2.0"
+            "version": "==2.3.0"
         },
         "pyparsing": {
             "hashes": [
