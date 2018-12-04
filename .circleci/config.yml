@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: Test notebooks
-          command:
+          command: |
             source venv/bin/activate
             make test
 
