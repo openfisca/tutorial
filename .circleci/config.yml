@@ -44,4 +44,7 @@ workflows:
   test:
     jobs:
       - stable
-      - edge
+      - edge:
+          filters:
+            branches:
+              only: master
