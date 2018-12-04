@@ -11,9 +11,6 @@ jobs:
       - checkout:
           path: ~/tutorial
 
-      - restore_cache:
-          key: v3-{{ checksum "Pipfile.lock" }}
-
       - run:
           name: Install dependencies
           command: make install
@@ -21,12 +18,6 @@ jobs:
       - run:
           name: Test notebooks
           command: make test
-
-      - save_cache:
-          key: v3-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ~/.local/share/virtualenvs
-            - ./venv
 
 workflows:
   version: 2
