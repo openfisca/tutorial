@@ -1,7 +1,7 @@
 # CircleCI 2.0 configuration file. See <https://circleci.com/docs/2.0/language-python/>.
 version: 2
 jobs:
-  test_notebooks:
+  stable:
     working_directory: ~/tutorial/notebooks
 
     docker:
@@ -19,8 +19,29 @@ jobs:
           name: Test notebooks
           command: make test
 
+  edge:
+    working_directory: ~/tutorial/notebooks
+
+    docker:
+      - image: python:3.7
+
+    steps:
+      - checkout:
+          path: ~/tutorial
+
+      - run:
+          name: Install dependencies
+          environment:
+            PIPENV_OPTION: --skip-lock
+          command: make install
+
+      - run:
+          name: Test notebooks
+          command: make test
+
 workflows:
   version: 2
   test:
     jobs:
-      - test_notebooks
+      - stable
+      - edge

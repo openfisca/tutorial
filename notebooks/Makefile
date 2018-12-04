@@ -2,7 +2,8 @@ all: test
 
 install:
 	pip install --upgrade pip pipenv
-	pipenv install --dev --keep-outdated
+	# $PIPENV_OPTION is used to skip Pipfile.lock on edge CircleCI build
+	pipenv install --dev --keep-outdated ${PIPENV_OPTION}
 
 run:
 	pipenv run jupyter notebook
