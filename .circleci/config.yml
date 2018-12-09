@@ -15,7 +15,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command:
+          command: |
             source /tmp/venv/tutorial/bin/activate
             make install
 
@@ -38,7 +38,7 @@ jobs:
 
       - run:
           name: Test notebooks
-          command:
+          command: |
             source /tmp/venv/tutorial/bin/activate
             make test
 
