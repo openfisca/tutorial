@@ -31,11 +31,11 @@ jobs:
       - image: python:3.7
 
     steps:
+      - attach_workspace:
+          at: /tmp/venv
+
       - checkout:
           path: ~/tutorial
-
-    - attach_workspace:
-        at: /tmp/venv
 
       - run:
           name: Test notebooks
