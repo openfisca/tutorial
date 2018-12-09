@@ -46,4 +46,6 @@ workflows:
   build:
     jobs:
       - deps
-      - test_notebooks
+      - test_notebooks:
+          requires:
+            - deps
