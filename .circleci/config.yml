@@ -11,19 +11,18 @@ jobs:
 
       - run:
           name: Create a virtualenv
-          command: |
-            mkdir -p /tmp/venv/tutorial
-            python -m venv /tmp/venv/tutorial
-            echo "source /tmp/venv/tutorial/bin/activate" >> $BASH_ENV
+          command: python -m venv /tmp/venv/tutorial
 
       - run:
           name: Install dependencies
-          command: make install
+          command:
+            source /tmp/venv/tutorial/bin/activate
+            make install
 
       - persist_to_workspace:
-          root: /tmp/venv
+          root: /tmp/venv/tutorial
           paths:
-            - tutorial
+            - "*"
 
   test_notebooks:
     working_directory: ~/tutorial/notebooks
@@ -31,15 +30,17 @@ jobs:
       - image: python:3.7
 
     steps:
-      - attach_workspace:
-          at: /tmp/venv
-
       - checkout:
           path: ~/tutorial
 
+      - attach_workspace:
+          at: /tmp/venv/tutorial
+
       - run:
           name: Test notebooks
-          command: make test
+          command:
+            source /tmp/venv/tutorial/bin/activate
+            make test
 
 workflows:
   version: 2
