@@ -1,9 +1,7 @@
-# CircleCI 2.0 configuration file. See <https://circleci.com/docs/2.0/language-python/>.
 version: 2
 jobs:
-  test_notebooks:
-    working_directory: ~/tutorial/notebooks
-
+  deps:
+    working_directory: ~/tutorial
     docker:
       - image: python:3.7
 
@@ -12,15 +10,43 @@ jobs:
           path: ~/tutorial
 
       - run:
+          name: Create a virtualenv
+          command: python -m venv /tmp/venv/tutorial
+
+      - run:
           name: Install dependencies
-          command: make install
+          command: |
+            source /tmp/venv/tutorial/bin/activate
+            make install
+
+      - persist_to_workspace:
+          root: /tmp/venv/tutorial
+          paths:
+            - "*"
+
+  test_notebooks:
+    working_directory: ~/tutorial/notebooks
+    docker:
+      - image: python:3.7
+
+    steps:
+      - checkout:
+          path: ~/tutorial
+
+      - attach_workspace:
+          at: /tmp/venv/tutorial
 
       - run:
           name: Test notebooks
-          command: make test
+          command: |
+            source /tmp/venv/tutorial/bin/activate
+            make test
 
 workflows:
   version: 2
-  test:
+  build:
     jobs:
-      - test_notebooks
+      - deps
+      - test_notebooks:
+          requires:
+            - deps
