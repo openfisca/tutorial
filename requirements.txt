@@ -1,1 +1,8 @@
-openfisca_france
+ipykernel==5.1.0
+jupyter-client==5.2.3
+jupyter==1.0.0
+matplotlib==3.0.2
+nbconvert==5.4.0
+nbformat==4.4.0
+numpy==1.15.4
+openfisca-france==29.4.1

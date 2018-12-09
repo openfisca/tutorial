@@ -18,8 +18,8 @@ Just click here to start:
 
 To install and launch a jupyter notebook locally:
  ```sh
-cd notebooks
 make install
+cd notebooks
 make run
 ```
 
