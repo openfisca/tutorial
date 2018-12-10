@@ -1,6 +1,7 @@
 version: 2
 jobs:
-  deps:
+  # First, we install the required libraries for the test to run.
+  install_dependencies:
     working_directory: ~/tutorial
     docker:
       - image: python:3.7
@@ -9,6 +10,7 @@ jobs:
       - checkout:
           path: ~/tutorial
 
+      # We create a virtualenv to isolate as much as possible our test environment.
       - run:
           name: Create a virtualenv
           command: python -m venv /tmp/venv/tutorial
@@ -19,11 +21,14 @@ jobs:
             source /tmp/venv/tutorial/bin/activate
             make install
 
+      # We save our virtualenv to reuse it later.
       - persist_to_workspace:
           root: /tmp/venv/tutorial
           paths:
             - "*"
 
+  # Then, we test our notebooks are still compatible with th installed libraries.
+  # Note that our working directory is different now.
   test_notebooks:
     working_directory: ~/tutorial/notebooks
     docker:
@@ -33,6 +38,8 @@ jobs:
       - checkout:
           path: ~/tutorial
 
+      # We load our previously created virtualenv.
+      # So we can run our tests even if in another working directory.
       - attach_workspace:
           at: /tmp/venv/tutorial
 
@@ -46,7 +53,7 @@ workflows:
   version: 2
   build:
     jobs:
-      - deps
+      - install_dependencies
       - test_notebooks:
           requires:
-            - deps
+            - install_dependencies
