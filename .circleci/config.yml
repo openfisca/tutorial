@@ -1,15 +1,11 @@
-# CircleCI 2.0 configuration file. See <https://circleci.com/docs/2.0/language-python/>.
 version: 2
 jobs:
-  test_notebooks:
-    working_directory: ~/tutorial/notebooks
-
+  build:
     docker:
       - image: python:3.7
 
     steps:
-      - checkout:
-          path: ~/tutorial
+      - checkout
 
       - run:
           name: Install dependencies
@@ -17,10 +13,12 @@ jobs:
 
       - run:
           name: Test notebooks
-          command: make test
+          command: |
+            cd notebooks
+            make test
 
 workflows:
   version: 2
-  test:
+  build:
     jobs:
-      - test_notebooks
+      - build

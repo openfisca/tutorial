@@ -1,14 +1,12 @@
 all: test
 
-install:
-	pip install --upgrade pip pipenv
-	pipenv install --dev --keep-outdated
-
 run:
-	pipenv run jupyter notebook
+	@# To run Jupyter locally (without Binder)
+	jupyter notebook
 
 test: clean
-	pipenv run python test_notebooks.py .
+	@# To test that notebooks are compatible with the installed libraries.
+	python test_notebooks.py .
 
 clean:
 	rm -f executed_*

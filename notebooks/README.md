@@ -2,7 +2,7 @@
 
 ## Installation
 
-In your console, go into `notebooks` directory and install dependencies with:
+In your console, go to the root of this repository and install dependencies with:
 
 ```sh
 make install
@@ -10,18 +10,25 @@ make install
 
 ## How to use the notebooks
 
-In your console, run:
+### With Binder
+
+Open your browser and visit [http://mybinder.org:/repo/openfisca/tutorial](http://mybinder.org:/repo/openfisca/tutorial)
+
+### Locally
+
+In your console, go to the `notebooks` directory and run:
 
 ```sh
 make run
 ```
 
-See the new page opened in your default browser and have fun. 😃  
+See the new page opened in your default browser and have fun. 😃
+
 Then, to stop Jupyter Notebook server, use Control-C.
 
 ## How to test the notebooks
 
-In your console, run:
+In your console, go to the `notebooks` directory and run:
 
 ```
 make test
