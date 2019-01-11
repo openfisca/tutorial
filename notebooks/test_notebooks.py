@@ -65,7 +65,7 @@ def run(notebook_path):
 
     except CellExecutionError:
         msg = 'Error executing the notebook "%s".\n' % notebook_filename
-        msg += 'See notebook "%s" for stack traceback.\n' % notebook_filename_out
+        msg += 'Take a look at the stack trace for more information.\n'
         log.error(msg)
         raise
 
