@@ -53,23 +53,21 @@ def run(notebook_path):
     try:
         # Execute all the cells in the notebook
         ep = ExecutePreprocessor(timeout = 600, kernel_name = "python")
-        executed_notebook = ep.preprocess(
+        ep.preprocess(
             notebook,
             {"metadata": {"path": notebook_directory}}
             )
 
-    except CellExecutionError:
-        executed_notebook = None
-        msg = 'Error executing the notebook "%s".\n' % notebook_filename
-        msg += 'See notebook "%s" for stack traceback.\n' % notebook_filename_out
-        log.error(msg)
-        raise
-
-    finally:
         with open(notebook_filename_out, mode = "wt") as f:
             write(notebook, f)
-        if executed_notebook is not None:
-            os.remove(notebook_filename_out)
+
+        os.remove(notebook_filename_out)
+
+    except CellExecutionError:
+        msg = 'Error executing the notebook "%s".\n' % notebook_filename
+        msg += 'Take a look at the stack trace for more information.\n'
+        log.error(msg)
+        raise
 
 
 # Check script target (file or directory) and test all notebooks
@@ -101,3 +99,4 @@ if __name__ == "__main__":
             elif e.message:
                 log.debug(e.message)
             log.error(traceback.format_exc())
+            sys.exit(1)
