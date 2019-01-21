@@ -5,4 +5,4 @@ matplotlib==3.0.2
 nbconvert==5.4.0
 nbformat==4.4.0
 numpy==1.16.0
-openfisca-france==34.2.0
+openfisca-france==34.2.1
