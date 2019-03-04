@@ -1,7 +1,7 @@
 ipykernel==5.1.0
 jupyter-client==5.2.4
 jupyter==1.0.0
-matplotlib==3.0.2
+matplotlib==3.0.3
 nbconvert==5.4.1
 nbformat==4.4.0
 numpy==1.16.2
