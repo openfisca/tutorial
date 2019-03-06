@@ -35,17 +35,10 @@ def is_notebook(file_path):
 
 def run(notebook_path):
     '''
-    Execute a notebook.
-
-    If an error occurs, then save results in a new notebook
-    of the name, prefixed bt "executed_".
+    Execute a notebook and update it with its execution result.
     '''
     notebook_directory = os.path.dirname(notebook_path)
     notebook_filename = os.path.basename(notebook_path)
-    notebook_filename_out = os.path.join(
-        notebook_directory,
-        'executed_' + notebook_filename
-        )
 
     with open(notebook_path) as f:
         notebook = read(f, as_version = 4)
@@ -58,16 +51,15 @@ def run(notebook_path):
             {"metadata": {"path": notebook_directory}}
             )
 
-        with open(notebook_filename_out, mode = "wt") as f:
-            write(notebook, f)
-
-        os.remove(notebook_filename_out)
-
     except CellExecutionError:
         msg = 'Error executing the notebook "%s".\n' % notebook_filename
         msg += 'Take a look at the stack trace for more information.\n'
         log.error(msg)
         raise
+
+    finally:
+	    with open(notebook_path, mode = "wt") as f:
+	        write(notebook, f)
 
 
 # Check script target (file or directory) and test all notebooks
