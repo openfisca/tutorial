@@ -7,9 +7,24 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          key: v1-py3-{{ .Branch }}-{{ checksum "setup.py" }}
+
+      - run:
+          name: Create a virtualenv
+          command: |
+            mkdir -p /tmp/venv/tutorial
+            python -m venv /tmp/venv/tutorial
+            echo "source /tmp/venv/tutorial/bin/activate" >> $BASH_ENV
+
       - run:
           name: Install dependencies
           command: make install
+
+      - save_cache:
+          key: v1-py3-{{ .Branch }}-{{ checksum "setup.py" }}
+          paths:
+            - /tmp/venv/tutorial
 
       - run:
           name: Test notebooks
@@ -17,8 +32,38 @@ jobs:
             cd notebooks
             make test
 
+  save_notebooks:
+    docker:
+      - image: python:3.7
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: v1-py3-{{ .Branch }}-{{ checksum "setup.py" }}
+
+      - run:
+          name: Test notebooks
+          command: |
+            cd notebooks
+            make test
+
+      - run:
+          name: Commit notebooks updated by tests
+          command: |
+            git add .
+            git commit -m "Save notebooks execution results"
+            git push
+
+
 workflows:
   version: 2
-  build:
+  build_and_save_notebooks:
     jobs:
       - build
+      - save_notebooks:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
