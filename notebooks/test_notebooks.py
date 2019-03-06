@@ -17,7 +17,8 @@ includes the execution results.
 
 This script is similar to running this command:
     jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 \
-                      --output executed_notebook.ipynotebook demo.ipynb
+                      --ExecutePreprocessor.kernel_name=python3 \
+                      --output demo.ipynb demo.ipynb
 
 on a group of notebooks. Whenever an error occurs, this script will give the user
 pretty printed output in order to fix it.
@@ -45,7 +46,7 @@ def run(notebook_path):
 
     try:
         # Execute all the cells in the notebook
-        ep = ExecutePreprocessor(timeout = 600, kernel_name = "python")
+        ep = ExecutePreprocessor(timeout = 600, kernel_name = "python3")
         ep.preprocess(
             notebook,
             {"metadata": {"path": notebook_directory}}
