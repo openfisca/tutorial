@@ -8,7 +8,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: v1-py3-{{ .Branch }}-{{ checksum "setup.py" }}
+          key: v1-py3-{{ .Branch }}-{{ checksum "requirements.txt" }}
 
       - run:
           name: Create a virtualenv
@@ -22,7 +22,7 @@ jobs:
           command: make install
 
       - save_cache:
-          key: v1-py3-{{ .Branch }}-{{ checksum "setup.py" }}
+          key: v1-py3-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - /tmp/venv/tutorial
 
@@ -40,7 +40,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: v1-py3-{{ .Branch }}-{{ checksum "setup.py" }}
+          key: v1-py3-{{ .Branch }}-{{ checksum "requirements.txt" }}
 
       - run:
           name: Test notebooks
