@@ -17,7 +17,8 @@ includes the execution results.
 
 This script is similar to running this command:
     jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 \
-                      --output executed_notebook.ipynotebook demo.ipynb
+                      --ExecutePreprocessor.kernel_name=python3 \
+                      --output demo.ipynb demo.ipynb
 
 on a group of notebooks. Whenever an error occurs, this script will give the user
 pretty printed output in order to fix it.
@@ -35,39 +36,31 @@ def is_notebook(file_path):
 
 def run(notebook_path):
     '''
-    Execute a notebook.
-
-    If an error occurs, then save results in a new notebook
-    of the name, prefixed bt "executed_".
+    Execute a notebook and update it with its execution result.
     '''
     notebook_directory = os.path.dirname(notebook_path)
     notebook_filename = os.path.basename(notebook_path)
-    notebook_filename_out = os.path.join(
-        notebook_directory,
-        'executed_' + notebook_filename
-        )
 
     with open(notebook_path) as f:
         notebook = read(f, as_version = 4)
 
     try:
         # Execute all the cells in the notebook
-        ep = ExecutePreprocessor(timeout = 600, kernel_name = "python")
+        ep = ExecutePreprocessor(timeout = 600, kernel_name = "python3")
         ep.preprocess(
             notebook,
             {"metadata": {"path": notebook_directory}}
             )
-
-        with open(notebook_filename_out, mode = "wt") as f:
-            write(notebook, f)
-
-        os.remove(notebook_filename_out)
 
     except CellExecutionError:
         msg = 'Error executing the notebook "%s".\n' % notebook_filename
         msg += 'Take a look at the stack trace for more information.\n'
         log.error(msg)
         raise
+
+    finally:
+	    with open(notebook_path, mode = "wt") as f:
+	        write(notebook, f)
 
 
 # Check script target (file or directory) and test all notebooks
