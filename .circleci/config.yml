@@ -43,6 +43,11 @@ jobs:
           key: v1-py3-{{ .Branch }}-{{ checksum "requirements.txt" }}
 
       - run:
+          name: Activate virtualenv
+          command: |
+            echo "source /tmp/venv/tutorial/bin/activate" >> $BASH_ENV
+
+      - run:
           name: Test notebooks
           command: |
             cd notebooks
