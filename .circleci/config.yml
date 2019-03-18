@@ -7,68 +7,31 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          key: v1-py3-{{ .Branch }}-{{ checksum "requirements.txt" }}
-
-      - run:
-          name: Create a virtualenv
-          command: |
-            mkdir -p /tmp/venv/tutorial
-            python -m venv /tmp/venv/tutorial
-            echo "source /tmp/venv/tutorial/bin/activate" >> $BASH_ENV
-
       - run:
           name: Install dependencies
           command: make install
 
-      - save_cache:
-          key: v1-py3-{{ .Branch }}-{{ checksum "requirements.txt" }}
-          paths:
-            - /tmp/venv/tutorial
-
       - run:
           name: Test notebooks
           command: |
             cd notebooks
             make test
-
-  save_notebooks:
-    docker:
-      - image: python:3.7
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          key: v1-py3-{{ .Branch }}-{{ checksum "requirements.txt" }}
-
+      
       - run:
-          name: Activate virtualenv
-          command: |
-            echo "source /tmp/venv/tutorial/bin/activate" >> $BASH_ENV
-
-      - run:
-          name: Test notebooks
-          command: |
-            cd notebooks
-            make test
+          name: Check for dependabot branch  # continue only if last commit belongs to dependabot
+          command: if [ `git log -1 --pretty=format:'%cn'` != "dependabot[bot]" ] ; then circleci step halt ; fi
 
       - run:
           name: Commit notebooks updated by tests
           command: |
+            git config user.email "contact@openfisca.fr"
+            git config user.name "openfisca-bot" 
             git add .
             git commit -m "Save notebooks execution results"
             git push
 
-
 workflows:
   version: 2
-  build_and_save_notebooks:
+  build:
     jobs:
       - build
-      - save_notebooks:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
