@@ -28,7 +28,7 @@ jobs:
             git config user.name "openfisca-bot" 
             git add .
             git commit -m "Save notebooks execution results"
-            git push
+            git push --set-upstream origin `git name-rev --name-only HEAD`
 
 workflows:
   version: 2
