@@ -12,7 +12,7 @@ The tutorial notebooks of OpenFisca offer you an overview of how to compute with
 
 Just click here to start:
 
-[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org:/repo/openfisca/tutorial)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/openfisca/tutorial/master?filepath=notebooks%2Findex.ipynb)
 
 > This repository entails also the configuration files for the [Binder](http://mybinder.org/) which deploys a computational environment with the technology of [Jupyter](http://jupyter.org) Notebooks.
 
