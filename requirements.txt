@@ -4,5 +4,5 @@ jupyter==1.0.0
 matplotlib==3.0.3
 nbconvert==5.4.1
 nbformat==4.4.0
-numpy<1.16,>=1.11
+numpy>=1.11,<1.17
 openfisca-france==42.2.0
