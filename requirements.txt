@@ -1,4 +1,4 @@
-ipykernel==5.1.4
+ipykernel==6.0.2
 jupyter-client==6.1.5
 jupyter==1.0.0
 matplotlib==3.3.3
